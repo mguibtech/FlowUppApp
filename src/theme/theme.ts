@@ -5,6 +5,7 @@ export const palette = {
   greenHoneydew: '#F1FFF3',
   greenPrimary: '#00D09E',
   greenCyprus: '#0E3E3E',
+  greenDarkLight: '#093030',
   greenDark: '#052224',
 
   blueLight: '#6DB6FE',
@@ -24,7 +25,7 @@ export const theme = createTheme({
     primary: palette.greenPrimary,
     primaryContrast: palette.greenCyprus,
     background: palette.greenHoneydew,
-    backgroundContrast: palette.greenDark,
+    backgroundContrast: palette.greenDarkLight,
 
     success: palette.greenPrimary,
     successLight: palette.greenLight,
@@ -53,6 +54,7 @@ export const theme = createTheme({
     s8: 8,
     s12: 12,
     s16: 16,
+    s18: 18,
     s20: 20,
   },
   textVariants: {
