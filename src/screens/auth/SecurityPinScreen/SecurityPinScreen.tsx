@@ -27,7 +27,7 @@ export function SecurityPinScreen() {
 
     const handleNext = () => {
         if (pin.length === 6) {
-            console.log("PIN digitado:", pin);
+            navigation.navigate("NewPasswordScreen" as never);
         }
     };
 

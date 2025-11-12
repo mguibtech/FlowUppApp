@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ForgotPassword } from "../screens/auth/ForgotPassword/ForgotPassword";
 import { SignUpScreen } from "../screens/auth/SignUpScreen/SignUpScreen";
 import { SecurityPinScreen } from "../screens/auth/SecurityPinScreen/SecurityPinScreen";
+import NewPasswordScreen from "../screens/auth/NewPasswordScreen/NewPasswordScreen";
 
 
 type AuthStackParamList = {
@@ -12,6 +13,7 @@ type AuthStackParamList = {
     SignUpScreen: undefined;
     ForgotPassword: undefined;
     SecurityPinScreen: undefined;
+    NewPasswordScreen: undefined;
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -28,6 +30,7 @@ export function AuthStack() {
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name="SecurityPinScreen" component={SecurityPinScreen} />
+            <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
         </Stack.Navigator>
     );
 }

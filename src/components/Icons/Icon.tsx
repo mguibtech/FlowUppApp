@@ -5,6 +5,8 @@ import { useAppTheme } from "../../hooks/useAppTheme";
 import { ThemeColors } from "../../theme/theme";
 import { FacebookIcon } from "../../assets/icons/FacebookIcon";
 import { GoogleIcon } from "../../assets/icons/GoogleIcon";
+import { ProgressCancelIcon } from "../../assets/icons/ProgressCancelIcon";
+import { ProgressSuccessIcon } from "../../assets/icons/ProgressSuccessIcon";
 
 
 export interface IconProps {
@@ -38,6 +40,8 @@ const iconRegistry = {
     eyeOn: EyeOnComponent,
     facebook: FacebookIcon,
     google: GoogleIcon,
+    progressCancel: ProgressCancelIcon,
+    progressSuccess: ProgressSuccessIcon,
 };
 
 type IconType = typeof iconRegistry;
