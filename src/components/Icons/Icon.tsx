@@ -7,6 +7,7 @@ import { FacebookIcon } from "../../assets/icons/FacebookIcon";
 import { GoogleIcon } from "../../assets/icons/GoogleIcon";
 import { ProgressCancelIcon } from "../../assets/icons/ProgressCancelIcon";
 import { ProgressSuccessIcon } from "../../assets/icons/ProgressSuccessIcon";
+import { FingerprintIcon } from "../../assets/icons/FingerprintIcon";
 
 
 export interface IconProps {
@@ -42,6 +43,7 @@ const iconRegistry = {
     google: GoogleIcon,
     progressCancel: ProgressCancelIcon,
     progressSuccess: ProgressSuccessIcon,
+    fingerprint: FingerprintIcon,
 };
 
 type IconType = typeof iconRegistry;

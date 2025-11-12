@@ -24,6 +24,10 @@ export function LoginScreen() {
         navigation.navigate("ForgotPassword" as never);
     }
 
+    function handleFingerprint() {
+        navigation.navigate("FingerprintScreen" as never);
+    }
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -97,7 +101,7 @@ export function LoginScreen() {
                                     marginTop="s16"
                                     bold
                                 >
-                                    Usar <Text bold color="blueOcean">digital</Text> para acessar
+                                    Usar <Text onPress={handleFingerprint} bold color="blueOcean">digital</Text> para acessar
                                 </Text>
                             </Pressable>
 

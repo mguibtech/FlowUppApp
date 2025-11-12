@@ -6,14 +6,17 @@ import { ForgotPassword } from "../screens/auth/ForgotPassword/ForgotPassword";
 import { SignUpScreen } from "../screens/auth/SignUpScreen/SignUpScreen";
 import { SecurityPinScreen } from "../screens/auth/SecurityPinScreen/SecurityPinScreen";
 import NewPasswordScreen from "../screens/auth/NewPasswordScreen/NewPasswordScreen";
+import { FingerprintScreen } from "../screens/auth/FingerprintScreen/FingerprintScreen";
 
 
-type AuthStackParamList = {
+
+export type AuthStackParamList = {
     Login: undefined;
     SignUpScreen: undefined;
     ForgotPassword: undefined;
     SecurityPinScreen: undefined;
     NewPasswordScreen: undefined;
+    FingerprintScreen: undefined;
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -31,6 +34,7 @@ export function AuthStack() {
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name="SecurityPinScreen" component={SecurityPinScreen} />
             <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
+            <Stack.Screen name="FingerprintScreen" component={FingerprintScreen} />
         </Stack.Navigator>
     );
 }
