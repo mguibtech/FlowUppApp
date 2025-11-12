@@ -11,7 +11,7 @@ import { Text } from "../../../components/Text/Text";
 import { TextInput } from "../../../components/TextInput/TextInput";
 import { useNavigation } from "@react-navigation/native";
 
-export function SingInScreen() {
+export function SignUpScreen() {
     const navigation = useNavigation();
     return (
         <KeyboardAvoidingView

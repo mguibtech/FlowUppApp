@@ -17,7 +17,11 @@ export function LoginScreen() {
     const navigation = useNavigation();
 
     function handleSingIn() {
-        navigation.navigate("SingInScreen" as never);
+        navigation.navigate("SignUpScreen" as never);
+    }
+
+    function handleForgotPassword() {
+        navigation.navigate("ForgotPassword" as never);
     }
 
     return (
@@ -67,11 +71,12 @@ export function LoginScreen() {
 
                         <Box marginTop="s56" alignItems="center">
                             <Button title="Entrar" onPress={() => { }} width={207} />
-                            <Pressable onPress={() => { }}>
+                            <Pressable onPress={handleForgotPassword}>
                                 <Text
                                     preset="paragraphSmall"
-                                    color="primaryContrast"
+                                    color="blueOcean"
                                     marginTop="s16"
+                                    bold
                                 >
                                     Esqueceu sua senha?
                                 </Text>
