@@ -10,8 +10,16 @@ import { Button } from "../../../components/Button/Button";
 import { Icon } from "../../../components/Icons/Icon";
 import { Text } from "../../../components/Text/Text";
 import { TextInput } from "../../../components/TextInput/TextInput";
+import { useNavigation } from "@react-navigation/native";
 
 export function LoginScreen() {
+
+    const navigation = useNavigation();
+
+    function handleSingIn() {
+        navigation.navigate("SingInScreen" as never);
+    }
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -71,7 +79,7 @@ export function LoginScreen() {
 
                             <Button
                                 title="Criar conta"
-                                onPress={() => { }}
+                                onPress={handleSingIn}
                                 width={227}
                                 preset="outline"
                                 marginTop="s14"
@@ -100,7 +108,7 @@ export function LoginScreen() {
                                     Não tem uma conta?{" "}
                                     <Text
                                         preset="paragraphSmall"
-                                        onPress={() => { }}
+                                        onPress={handleSingIn}
                                         bold
                                         color="blueOcean"
                                     >
