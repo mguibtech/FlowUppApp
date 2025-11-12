@@ -13,6 +13,5 @@ export function EyeOnComponent({ size = 20, color = 'black' }: IconBase) {
             />
         </Svg>
 
-
     )
 }
