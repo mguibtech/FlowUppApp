@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+    Alert,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
@@ -7,19 +8,33 @@ import {
 import { Box } from "../../../components/Box/Box";
 import { Button } from "../../../components/Button/Button";
 import { Text } from "../../../components/Text/Text";
-import { TextInput } from "../../../components/TextInput/TextInput";
 import { Icon } from "../../../components/Icons/Icon";
 import { useNavigation } from "@react-navigation/native";
+import NumberBubbles from "../../../components/NumberBubbles/NumberBubbles";
 
 
-export function ForgotPassword() {
+export function SecurityPinScreen() {
     const navigation = useNavigation();
+    const [pin, setPin] = useState("");
+
     const handleCreateAccount = () => {
         navigation.navigate("SignUpScreen" as never);
+    };
+
+    const handlePinChange = (value: string) => {
+        setPin(value);
+    };
+
+    const handleNext = () => {
+        if (pin.length === 6) {
+            console.log("PIN digitado:", pin);
+        }
+    };
+
+    function handleSendAggin() {
+        Alert.alert("PIN digitado:", pin);
     }
-    const handleSecurityPin = () => {
-        navigation.navigate("SecurityPinScreen" as never);
-    }
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -33,7 +48,7 @@ export function ForgotPassword() {
                 <Box flex={1} backgroundColor="greenPrimary">
                     <Box alignItems="center" justifyContent="center" paddingVertical="s56">
                         <Text preset="headingMedium" color="primaryContrast">
-                            Esqueceu sua senha?
+                            Pin de segurança
                         </Text>
                     </Box>
 
@@ -45,38 +60,40 @@ export function ForgotPassword() {
                         paddingTop="s56"
                         paddingHorizontal="s36"
                     >
-                        <Text preset="headingSmall" color="primaryContrast" bold>Recuperar senha</Text>
-                        <Text preset="paragraphMedium" color="primaryContrast" mt="s10" mb="s56">
-                            Digite o email cadastrado para receber um código de recuperação
-                        </Text>
-                        <TextInput
-                            label="Digite seu email"
-                            placeholder="seu@email.com"
+                        <Text preset="headingSmall" textAlign="center" color="primaryContrast" semibold>Digite o pin de segurança</Text>
+
+                        <NumberBubbles
+                            value={pin}
+                            onChange={handlePinChange}
+                            length={6}
+                            autoFocus={true}
                         />
+
                         <Box marginTop="s24" alignItems="center">
                             <Box marginTop="s24" mb="s20" alignItems="center">
                                 <Button
                                     title="Proximo"
-                                    onPress={handleSecurityPin}
+                                    onPress={handleNext}
+                                    disabled={pin.length !== 6}
                                     titlePreset={{
                                         preset: "headingSmall",
                                     }}
-                                    width={207}
+                                    width={237}
                                 />
                             </Box>
 
-                            <Box marginTop="s56" alignItems="center">
+                            <Box alignItems="center" mb="s56">
                                 <Button
-                                    title="Criar conta"
-                                    onPress={handleCreateAccount}
+                                    title="Enviar novamente"
+                                    onPress={handleSendAggin}
                                     preset="outline"
-                                    width={207}
+                                    width={237}
                                     titlePreset={{
                                         preset: "headingSmall",
                                     }}
                                 />
                             </Box>
-                            <Text preset="paragraphSmall" color="primaryContrast" textAlign="center" mt="s24">ou criar uma conta com</Text>
+                            <Text marginTop="s56" preset="paragraphSmall" color="primaryContrast" textAlign="center">ou criar uma conta com</Text>
                             <Box marginTop="s8" alignItems="center" flexDirection="row" gap="s16" justifyContent="center">
                                 <Icon name="google" size={32} color="primaryContrast" />
                                 <Icon name="facebook" size={32} color="primaryContrast" />
