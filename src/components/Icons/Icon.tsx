@@ -1,4 +1,6 @@
 import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
   EyeOffComponent,
   EyeOnComponent,
   FacebookIcon,
@@ -6,6 +8,7 @@ import {
   GoogleIcon,
   ProgressCancelIcon,
   ProgressSuccessIcon,
+  NotificationIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -45,6 +48,9 @@ const iconRegistry = {
   progressCancel: ProgressCancelIcon,
   progressSuccess: ProgressSuccessIcon,
   fingerprint: FingerprintIcon,
+  arrowLeft: ArrowLeftIcon,
+  arrowRight: ArrowRightIcon,
+  notification: NotificationIcon,
 };
 
 type IconType = typeof iconRegistry;

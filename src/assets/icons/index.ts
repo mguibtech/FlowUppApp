@@ -5,3 +5,6 @@ export * from './ProgressSuccessIcon';
 export * from './ProgressCancelIcon';
 export * from './GoogleIcon';
 export * from './FacebookIcon';
+export * from './ArrowLeftIcon';
+export * from './ArrowRightIcon';
+export * from './NotificationIcon';

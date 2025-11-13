@@ -1,11 +1,19 @@
-import { Box, ScreenProps, Text, TouchableOpacityBox } from '@components';
+import { Box, Icon, ScreenProps, Text, TouchableOpacityBox } from '@components';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppStackParamList } from '@routes';
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 30;
+type Props = Pick<ScreenProps, 'title' | 'canGoBack' | 'icon' | 'subtitle'>;
+type NavigationProp = StackNavigationProp<AppStackParamList>;
 
-type Props = Pick<ScreenProps, 'title' | 'canGoBack'>;
-export function ScreenHeader({ canGoBack, title }: Props) {
-  const navigation = useNavigation();
+export function ScreenHeader({ canGoBack, title, icon, subtitle }: Props) {
+  const navigation = useNavigation<NavigationProp>();
+  const handlePressIcon = () => {
+    if (icon === 'notification') {
+      navigation.navigate('NotificationScreen');
+    }
+  };
   return (
     <Box
       flexDirection="row"
@@ -19,16 +27,14 @@ export function ScreenHeader({ canGoBack, title }: Props) {
           alignItems="center"
           onPress={navigation.goBack}
         >
-          {/* <Icon size={ICON_SIZE} name="arrowLeft" color="primary" /> */}
-          {!title && (
-            <Text preset="paragraphMedium" semibold ml="s8">
-              Voltar
-            </Text>
-          )}
+          <Icon size={ICON_SIZE} name="arrowLeft" />
         </TouchableOpacityBox>
       )}
-      {title && <Text preset="headingSmall">{title}</Text>}
-      {title && <Box backgroundColor="primaryContrast" width={ICON_SIZE} />}
+      <Box>
+        {title && <Text preset="headingSmall">{title}</Text>}
+        {subtitle && <Text>{subtitle}</Text>}
+      </Box>
+      {icon && <Icon onPress={handlePressIcon} size={ICON_SIZE} name={icon} />}
     </Box>
   );
 }
