@@ -1,5 +1,23 @@
 {
   "extends": "@react-native/typescript-config",
   "include": ["**/*.ts", "**/*.tsx", "src/screens/auth/SignUpScreen"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "exclude": ["**/node_modules", "**/Pods"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components": ["src/components"],
+      "@hooks": ["src/hooks"],
+      "@routes": ["src/routes"],
+      "@screens": ["src/screens"],
+      "@theme": ["src/theme"],
+      "@domain": ["src/domain"],
+      "@brand": ["src/brand"],
+      "@api": ["src/api"],
+      "@types": ["src/types"],
+      "@utils": ["src/utils"],
+      "@infra": ["src/infra"],
+      "@services": ["src/services"],
+      "@assets": ["src/assets"]
+    }
+  }
 }
