@@ -40,8 +40,11 @@ export function Screen({
     >
       <Container backgroundColor={colors.primary}>
         <Box
-          paddingHorizontal="s24"
-          style={[{ paddingTop: top, paddingBottom: bottom }, style]}
+          flex={1}
+          // paddingHorizontal="s24"
+          style={[{ paddingTop: top }, style]}
+          // style={[{ paddingTop: top, paddingBottom: bottom }, style]}
+
           {...boxProps}
         >
           <ScreenHeader

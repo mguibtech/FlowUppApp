@@ -8,3 +8,4 @@ export * from './NumberBubbles/NumberBubbles';
 export * from './Text/Text';
 export * from './TextInput/TextInput';
 export * from './screen/Screen';
+export * from './HeaderBalanceShort/HeaderBalanceShort';

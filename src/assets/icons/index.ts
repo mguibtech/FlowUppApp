@@ -8,3 +8,6 @@ export * from './FacebookIcon';
 export * from './ArrowLeftIcon';
 export * from './ArrowRightIcon';
 export * from './NotificationIcon';
+export * from './ExpenseIcon';
+export * from './IncomeIcon';
+export * from './CheckIcon';

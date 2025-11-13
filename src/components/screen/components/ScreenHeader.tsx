@@ -18,6 +18,7 @@ export function ScreenHeader({ canGoBack, title, icon, subtitle }: Props) {
     <Box
       flexDirection="row"
       mb="s24"
+      paddingHorizontal="s24"
       alignItems="center"
       justifyContent="space-between"
     >

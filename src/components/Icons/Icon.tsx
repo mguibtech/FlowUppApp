@@ -9,6 +9,9 @@ import {
   ProgressCancelIcon,
   ProgressSuccessIcon,
   NotificationIcon,
+  ExpenseIcon,
+  IncomeIcon,
+  CheckIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -51,6 +54,9 @@ const iconRegistry = {
   arrowLeft: ArrowLeftIcon,
   arrowRight: ArrowRightIcon,
   notification: NotificationIcon,
+  expense: ExpenseIcon,
+  income: IncomeIcon,
+  check: CheckIcon,
 };
 
 type IconType = typeof iconRegistry;
