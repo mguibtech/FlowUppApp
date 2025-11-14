@@ -32,7 +32,7 @@ export function ScreenHeader({ canGoBack, title, icon, subtitle }: Props) {
         </TouchableOpacityBox>
       )}
       <Box>
-        {title && <Text preset="headingSmall">{title}</Text>}
+        {title && <Text preset="headingMedium">{title}</Text>}
         {subtitle && <Text>{subtitle}</Text>}
       </Box>
       {icon && <Icon onPress={handlePressIcon} size={ICON_SIZE} name={icon} />}

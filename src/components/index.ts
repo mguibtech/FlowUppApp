@@ -9,3 +9,5 @@ export * from './Text/Text';
 export * from './TextInput/TextInput';
 export * from './screen/Screen';
 export * from './HeaderBalanceShort/HeaderBalanceShort';
+export * from './SelectInput/SelectInput';
+export * from './CircularProgressIcon/CircularProgressIcon';

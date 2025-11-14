@@ -1,4 +1,5 @@
 import { Box, HeaderBalanceShort, Screen, Text } from '@components';
+import { HomeResumeGoals } from './Components/HomeResumeGoals/HomeResumeGoals';
 
 export function HomeScreen() {
   return (
@@ -10,12 +11,11 @@ export function HomeScreen() {
           backgroundColor="background"
           borderTopLeftRadius="s56"
           borderTopRightRadius="s56"
-          mt="s32"
-          paddingTop="s32"
+          mt="s20"
+          paddingTop="s24"
+          paddingHorizontal="s24"
         >
-          <Text preset="headingSmall" color="backgroundContrast">
-            Resumo do mês
-          </Text>
+          <HomeResumeGoals />
         </Box>
       </Box>
     </Screen>

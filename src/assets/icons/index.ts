@@ -11,3 +11,8 @@ export * from './NotificationIcon';
 export * from './ExpenseIcon';
 export * from './IncomeIcon';
 export * from './CheckIcon';
+export * from './ArrowDownIcon';
+export * from './ArrowUpIcon';
+export * from './CarIcon';
+export * from './SalaryIcon';
+export * from './FoodIcon';

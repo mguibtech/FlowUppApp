@@ -12,6 +12,11 @@ import {
   ExpenseIcon,
   IncomeIcon,
   CheckIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CarIcon,
+  SalaryIcon,
+  FoodIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -57,6 +62,11 @@ const iconRegistry = {
   expense: ExpenseIcon,
   income: IncomeIcon,
   check: CheckIcon,
+  arrowDown: ArrowDownIcon,
+  arrowUp: ArrowUpIcon,
+  car: CarIcon,
+  salary: SalaryIcon,
+  food: FoodIcon,
 };
 
 type IconType = typeof iconRegistry;
