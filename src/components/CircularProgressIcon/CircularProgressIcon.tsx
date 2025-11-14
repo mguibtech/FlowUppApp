@@ -15,6 +15,7 @@ export interface CircularProgressIconProps {
   readonly backgroundColor?: ThemeColors;
   readonly iconColor?: ThemeColors;
   readonly iconSize?: number;
+  readonly iconBackgroundColor?: ThemeColors; // Background circle for icon
   readonly title?: string;
   readonly subtitle?: string;
 }
@@ -28,6 +29,7 @@ export function CircularProgressIcon({
   backgroundColor = 'white',
   iconColor = 'backgroundContrast',
   iconSize = 37,
+  iconBackgroundColor,
   title,
   subtitle,
 }: CircularProgressIconProps) {
@@ -37,6 +39,7 @@ export function CircularProgressIcon({
   const circumference = 2 * Math.PI * radius;
   const progressValue = Math.min(Math.max(progress, 0), 100);
   const strokeDashoffset = circumference - (progressValue / 100) * circumference;
+  const iconBgRadius = iconBackgroundColor ? size * 0.35 : 0;
 
   return (
     <Box alignItems="center" gap="s8">
@@ -63,6 +66,15 @@ export function CircularProgressIcon({
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
               strokeLinecap="round"
+            />
+          )}
+          {/* Icon background circle */}
+          {iconBackgroundColor && (
+            <Circle
+              cx={size / 2}
+              cy={size / 2}
+              r={iconBgRadius}
+              fill={colors[iconBackgroundColor]}
             />
           )}
         </Svg>
