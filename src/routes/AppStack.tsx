@@ -1,8 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen, NotificationScreen } from '@screens';
+import { NotificationScreen } from '@screens';
+import { AppTabNavigation } from '@routes';
 
 export type AppStackParamList = {
-  HomeScreen: undefined;
+  AppTabNavigation: undefined;
   NotificationScreen: undefined;
 };
 
@@ -15,7 +16,7 @@ export function AppStack() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="AppTabNavigation" component={AppTabNavigation} />
       <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
     </Stack.Navigator>
   );

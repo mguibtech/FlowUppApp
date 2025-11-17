@@ -17,6 +17,16 @@ import {
   CarIcon,
   SalaryIcon,
   FoodIcon,
+  AnalysisIcon,
+  AnalysisFillIcon,
+  CategoryIcon,
+  CategoryFillIcon,
+  HomeFillIcon,
+  HomeIcon,
+  ProfileFillIcon,
+  ProfileIcon,
+  TransactionFillIcon,
+  TransactionIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -39,13 +49,22 @@ export function Icon({
   const SVGIcon = iconRegistry[name];
 
   if (onPress) {
+    // Fix type issue: ensure 'color' has correct type for index
     return (
       <Pressable onPress={onPress}>
-        <SVGIcon color={colors[color]} size={size} />
+        <SVGIcon
+          color={colors[color as keyof typeof colors] as ThemeColors}
+          size={size}
+        />
       </Pressable>
     );
   }
-  return <SVGIcon color={colors[color]} size={size} />;
+  return (
+    <SVGIcon
+      color={colors[color as keyof typeof colors] as ThemeColors}
+      size={size}
+    />
+  );
 }
 
 const iconRegistry = {
@@ -67,6 +86,16 @@ const iconRegistry = {
   car: CarIcon,
   salary: SalaryIcon,
   food: FoodIcon,
+  analysis: AnalysisIcon,
+  analysisFill: AnalysisFillIcon,
+  category: CategoryIcon,
+  categoryFill: CategoryFillIcon,
+  home: HomeIcon,
+  homeFill: HomeFillIcon,
+  transaction: TransactionIcon,
+  transactionFill: TransactionFillIcon,
+  profile: ProfileIcon,
+  profileFill: ProfileFillIcon,
 };
 
 type IconType = typeof iconRegistry;

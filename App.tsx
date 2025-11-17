@@ -11,15 +11,13 @@ import { theme } from './src/theme/theme';
 import { Router } from './src/routes/Router';
 
 function App() {
-
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
         <Router />
-      </SafeAreaProvider >
-    </ThemeProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
-
 
 export default App;
