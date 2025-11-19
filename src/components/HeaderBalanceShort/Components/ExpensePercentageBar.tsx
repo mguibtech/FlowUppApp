@@ -2,13 +2,15 @@ import { Box, Icon, Text } from '@components';
 import { useMemo } from 'react';
 
 interface ExpensePercentageBarProps {
-  readonly income: number;
-  readonly expense: number;
+  income: number;
+  expense: number;
+  showPercentage?: boolean;
 }
 
 export function ExpensePercentageBar({
   income,
   expense,
+  showPercentage = false,
 }: ExpensePercentageBarProps) {
   const percentage = useMemo(() => {
     if (income === 0) return 0;
@@ -35,7 +37,44 @@ export function ExpensePercentageBar({
   const showPercentageAbove = percentage <= 20 || percentage >= 85;
 
   return (
-    <Box marginTop="s16">
+    <Box>
+      <Box
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb="s14"
+      >
+        {/* Total de Entradas */}
+        <Box>
+          <Box flexDirection="row" alignItems="center" gap="s4">
+            {/* Icone de entradas da balança */}
+            <Icon name="income" size={12} color="backgroundContrast" />
+            <Text preset="paragraphSmall">Total de Entradas</Text>
+          </Box>
+          <Text preset="headingSmall" color="white">
+            R${' '}
+            {income.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </Text>
+        </Box>
+
+        {/* Separador */}
+        <Box width={2} height={42} backgroundColor="white" />
+
+        {/* Total de Gastos */}
+        <Box>
+          <Box flexDirection="row" alignItems="center" gap="s4">
+            {/* Icone de entradas da balança */}
+            <Icon name="expense" size={12} color="backgroundContrast" />
+            <Text preset="paragraphSmall">Total de Gastos</Text>
+          </Box>
+          <Text preset="headingSmall" color="blueVivid">
+            -R$ {formattedExpense}
+          </Text>
+        </Box>
+      </Box>
       {/* Porcentagem acima da barra (quando porcentagem é muito baixa ou muito alta) */}
       {showPercentageAbove && (
         <Box
@@ -114,13 +153,54 @@ export function ExpensePercentageBar({
         )}
       </Box>
 
+      {showPercentage && (
+        <Box flexDirection="row" gap="s16" justifyContent="center" mt="s24">
+          {/* Total de Entradas */}
+          <Box
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="white"
+            paddingHorizontal="s36"
+            paddingVertical="s8"
+            borderRadius="s16"
+          >
+            <Icon name="income" size={25} color="greenPrimary" />
+            <Text preset="paragraphSmall">Entradas</Text>
+            <Text preset="headingSmall">
+              {income.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </Text>
+          </Box>
+          {/* Total de Gastos */}
+          <Box
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="white"
+            paddingHorizontal="s36"
+            paddingVertical="s8"
+            borderRadius="s16"
+          >
+            <Icon name="expense" size={25} color="blueVivid" />
+            <Text preset="paragraphSmall">Gastos</Text>
+            <Text preset="headingSmall">
+              {expense.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </Text>
+          </Box>
+        </Box>
+      )}
+
       {/* Mensagem com ícone */}
       <Box
-        ml="s8"
+        ml="s32"
         flexDirection="row"
         alignItems="center"
         gap="s8"
-        marginTop="s4"
+        marginTop="s20"
       >
         <Icon name="check" size={12} color="backgroundContrast" />
         <Text preset="paragraphMedium" color="backgroundContrast">

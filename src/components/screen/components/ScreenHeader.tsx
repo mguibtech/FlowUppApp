@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppStackParamList } from '@routes';
 
-const ICON_SIZE = 30;
+const ICON_SIZE = 26;
 type Props = Pick<ScreenProps, 'title' | 'canGoBack' | 'icon' | 'subtitle'>;
 type NavigationProp = StackNavigationProp<AppStackParamList>;
 
@@ -17,7 +17,7 @@ export function ScreenHeader({ canGoBack, title, icon, subtitle }: Props) {
   return (
     <Box
       flexDirection="row"
-      mb="s24"
+      mb="s16"
       paddingHorizontal="s24"
       alignItems="center"
       justifyContent="space-between"
@@ -28,11 +28,11 @@ export function ScreenHeader({ canGoBack, title, icon, subtitle }: Props) {
           alignItems="center"
           onPress={navigation.goBack}
         >
-          <Icon size={ICON_SIZE} name="arrowLeft" />
+          <Icon size={ICON_SIZE} name="arrowLeft" color="white" />
         </TouchableOpacityBox>
       )}
       <Box>
-        {title && <Text preset="headingMedium">{title}</Text>}
+        {title && <Text preset="headingSmall">{title}</Text>}
         {subtitle && <Text>{subtitle}</Text>}
       </Box>
       {icon && <Icon onPress={handlePressIcon} size={ICON_SIZE} name={icon} />}
