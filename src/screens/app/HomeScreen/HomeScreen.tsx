@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 
-import { Box, HeaderBalanceShort, Screen } from '@components';
+import { BodyBox, Box, HeaderBalanceShort, Screen } from '@components';
 import { HomeResumeGoals } from './Components/HomeResumeGoals/HomeResumeGoals';
 import { PeriodTabs, PeriodType } from './Components/PeriodTabs/PeriodTabs';
 import {
@@ -67,15 +67,7 @@ export function HomeScreen() {
     <Screen title="Bem-vindo de volta!" icon="notification" subtitle="Bom dia">
       <Box flex={1}>
         <HeaderBalanceShort />
-        <Box
-          flex={1}
-          backgroundColor="background"
-          borderTopLeftRadius="s56"
-          borderTopRightRadius="s56"
-          mt="s20"
-          paddingTop="s10"
-          paddingHorizontal="s24"
-        >
+        <BodyBox>
           <HomeResumeGoals />
 
           {/* Period Tabs */}
@@ -94,7 +86,7 @@ export function HomeScreen() {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 16 }}
           />
-        </Box>
+        </BodyBox>
       </Box>
     </Screen>
   );

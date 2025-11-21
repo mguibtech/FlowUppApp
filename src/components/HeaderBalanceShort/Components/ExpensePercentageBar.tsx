@@ -200,7 +200,7 @@ export function ExpensePercentageBar({
         flexDirection="row"
         alignItems="center"
         gap="s8"
-        marginTop="s20"
+        marginTop="s12"
       >
         <Icon name="check" size={12} color="backgroundContrast" />
         <Text preset="paragraphMedium" color="backgroundContrast">

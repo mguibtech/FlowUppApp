@@ -14,3 +14,4 @@ export * from './SelectInput/SelectInput';
 export * from './CircularProgressIcon/CircularProgressIcon';
 export * from './BarChart/BarChart';
 export * from './ItemListTransaction/ItemListTransaction';
+export * from './BodyBox/BodyBox';
