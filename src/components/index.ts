@@ -12,3 +12,5 @@ export * from './HeaderBalanceShort/HeaderBalanceShort';
 export * from './HeaderBalanceShort/Components/ExpensePercentageBar';
 export * from './SelectInput/SelectInput';
 export * from './CircularProgressIcon/CircularProgressIcon';
+export * from './BarChart/BarChart';
+export * from './ItemListTransaction/ItemListTransaction';

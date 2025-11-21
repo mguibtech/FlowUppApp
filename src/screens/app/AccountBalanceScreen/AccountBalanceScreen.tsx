@@ -170,35 +170,36 @@ export function AccountBalanceScreen() {
 
       <Box
         flex={1}
-        mt="s32"
+        mt="s10"
         backgroundColor="white"
         borderTopLeftRadius="s56"
         borderTopRightRadius="s56"
         paddingTop="s40"
         paddingHorizontal="s16"
       >
-        <Box
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          mb="s24"
-        >
-          <Text preset="headingSmall" color="backgroundContrast">
-            Transações
-          </Text>
-          <Pressable
-            onPress={() => {
-              /* navegar pra tela de todas as transações */
-            }}
-          >
-            <Text preset="paragraphSmall" color="backgroundContrast">
-              Mostrar todas
-            </Text>
-          </Pressable>
-        </Box>
-
         <FlatList<Transaction>
           data={transactions}
+          ListHeaderComponent={() => (
+            <Box
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+              mb="s24"
+            >
+              <Text preset="headingSmall" color="backgroundContrast">
+                Transações
+              </Text>
+              <Pressable
+                onPress={() => {
+                  /* navegar pra tela de todas as transações */
+                }}
+              >
+                <Text preset="paragraphSmall" color="backgroundContrast">
+                  Mostrar todas
+                </Text>
+              </Pressable>
+            </Box>
+          )}
           keyExtractor={item => `${item.id}-${item.date}`}
           renderItem={({ item }) => <TransactionItem item={item} />}
           showsVerticalScrollIndicator={false}

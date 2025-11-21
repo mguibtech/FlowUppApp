@@ -53,6 +53,8 @@ import {
   TravelPressedIcon,
   MoreDefaultIcon,
   MorePressedIcon,
+  CalendarIcon,
+  SearchIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -148,6 +150,8 @@ const iconRegistry = {
   transportPressed: TransportPressedIcon,
   weddingDefault: WeddingDefaultIcon,
   weddingPressed: WeddingPressedIcon,
+  search: SearchIcon,
+  calendar: CalendarIcon,
 };
 
 type IconType = typeof iconRegistry;

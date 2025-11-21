@@ -6,8 +6,12 @@ import {
   Text,
   TouchableOpacityBox,
 } from '@components';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { AppStackParamList } from '@routes';
 
 export function HomeResumeGoals() {
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
+
   return (
     <Box
       backgroundColor="primary"
@@ -42,6 +46,9 @@ export function HomeResumeGoals() {
 
       {/* Body */}
       <TouchableOpacityBox
+        onPress={() => {
+          navigation.navigate('QuicklyAnalysisScreen');
+        }}
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"

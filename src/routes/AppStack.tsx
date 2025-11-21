@@ -1,12 +1,16 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { NotificationScreen } from '@screens';
 import { AppTabNavigation } from '@routes';
-import { AccountBalanceScreen } from '@screens';
+import {
+  AccountBalanceScreen,
+  NotificationScreen,
+  QuicklyAnalysisScreen,
+} from '@screens';
 
 export type AppStackParamList = {
   AppTabNavigation: undefined;
   NotificationScreen: undefined;
   AccountBalanceScreen: undefined;
+  QuicklyAnalysisScreen: undefined;
 };
 
 const Stack = createStackNavigator<AppStackParamList>();
@@ -23,6 +27,10 @@ export function AppStack() {
       <Stack.Screen
         name="AccountBalanceScreen"
         component={AccountBalanceScreen}
+      />
+      <Stack.Screen
+        name="QuicklyAnalysisScreen"
+        component={QuicklyAnalysisScreen}
       />
     </Stack.Navigator>
   );

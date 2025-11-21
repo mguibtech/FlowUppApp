@@ -54,3 +54,5 @@ export * from './SavingDefaultIcon';
 export * from './SavingPressedIcon';
 export * from './MoreDefaultIcon';
 export * from './MorePressedIcon';
+export * from './SearchIcon';
+export * from './CalendarIcon';
