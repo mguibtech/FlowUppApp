@@ -7,17 +7,12 @@ import {
 } from 'react-native';
 import { Box, Text, Button, Icon } from '@components';
 
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AuthStackParamList } from '@routes';
+import { AuthScreenProps } from '@routes';
 
-type NavigationProp = StackNavigationProp<AuthStackParamList>;
-
-export function FingerprintScreen() {
-  const navigation = useNavigation<NavigationProp>();
-
+export function FingerprintScreen({
+  navigation,
+}: AuthScreenProps<'FingerprintScreen'>) {
   const handleUseTouchId = () => {
-    // Aqui você pode adicionar a lógica de autenticação biométrica
     console.log('Usar Touch ID');
   };
 

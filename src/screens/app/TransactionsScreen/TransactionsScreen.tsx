@@ -1,6 +1,7 @@
-import { Box, Icon, Text } from '@components';
+import { Box, Icon } from '@components';
+import { AppTabScreenProps } from '@routes';
 
-export function TransactionsScreen() {
+export function TransactionsScreen({}: AppTabScreenProps<'TransactionScreen'>) {
   return (
     <Box>
       <Icon name="profile" />

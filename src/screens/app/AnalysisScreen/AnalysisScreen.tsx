@@ -15,8 +15,12 @@ import {
   PeriodTabsAnalysis,
   PeriodTypeAnalysis,
 } from './Components/PeriodTabsAnalysis';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppAnalysisStackParamList } from '@routes';
 
-export function AnalysisScreen() {
+export function AnalysisScreen({
+  navigation,
+}: NativeStackScreenProps<AppAnalysisStackParamList, 'AnalysisScreen'>) {
   const [selectedPeriod, setSelectedPeriod] =
     useState<PeriodTypeAnalysis>('daily');
 
@@ -67,8 +71,12 @@ export function AnalysisScreen() {
               title="Income & Expenses"
               data={chartData}
               maxValue={15000}
-              onSearchPress={() => {}}
-              onCalendarPress={() => {}}
+              onSearchPress={() => {
+                navigation.navigate('SearchScreen');
+              }}
+              onCalendarPress={() => {
+                navigation.navigate('CalendarScreen');
+              }}
             />
           </Box>
 

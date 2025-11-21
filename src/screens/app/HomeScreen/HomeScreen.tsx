@@ -8,12 +8,13 @@ import {
   TransactionItem,
   TransactionItemProps,
 } from './Components/TransactionItem/TransactionItem';
+import { AppTabScreenProps } from '@routes';
 
 export interface TransactionData extends TransactionItemProps {
   readonly id: string;
 }
 
-export function HomeScreen() {
+export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('monthly');
 
   const transactions: TransactionData[] = useMemo(

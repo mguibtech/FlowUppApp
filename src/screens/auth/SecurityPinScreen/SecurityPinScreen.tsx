@@ -6,14 +6,15 @@ import {
   ScrollView,
 } from 'react-native';
 import { Box, Button, Text, Icon, NumberBubbles } from '@components';
-import { useNavigation } from '@react-navigation/native';
+import { AuthScreenProps } from '@routes';
 
-export function SecurityPinScreen() {
-  const navigation = useNavigation();
+export function SecurityPinScreen({
+  navigation,
+}: AuthScreenProps<'SecurityPinScreen'>) {
   const [pin, setPin] = useState('');
 
   const handleCreateAccount = () => {
-    navigation.navigate('SignUpScreen' as never);
+    navigation.navigate('SignUpScreen');
   };
 
   const handlePinChange = (value: string) => {
@@ -22,7 +23,7 @@ export function SecurityPinScreen() {
 
   const handleNext = () => {
     if (pin.length === 6) {
-      navigation.navigate('NewPasswordScreen' as never);
+      navigation.navigate('NewPasswordScreen');
     }
   };
 

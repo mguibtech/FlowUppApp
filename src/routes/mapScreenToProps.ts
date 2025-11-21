@@ -18,7 +18,7 @@ export const mapScreenToProps: Record<
       unfocused: 'home',
     },
   },
-  AnalyticsScreen: {
+  AnalysisScreen: {
     label: 'Análise',
     icon: {
       focused: 'analysisFill',

@@ -6,11 +6,9 @@ import {
   Pressable,
 } from 'react-native';
 import { Text, TextInput, Icon, Button, Box } from '@components';
-import { useNavigation } from '@react-navigation/native';
+import { AuthScreenProps } from '@routes';
 
-export function LoginScreen() {
-  const navigation = useNavigation();
-
+export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
   function handleSingIn() {
     navigation.navigate('SignUpScreen' as never);
   }

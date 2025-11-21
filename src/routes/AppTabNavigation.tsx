@@ -10,12 +10,13 @@ import {
   ProfileScreen,
 } from '@screens';
 import { AppTabBar } from './AppTabBar';
+import { AppAnalysisStack } from './AppAnalysisStack';
 
 export type AppBottomTabParamList = {
   HomeScreen: undefined;
   TransactionScreen: undefined;
   CategoriesScreen: undefined;
-  AnalyticsScreen: undefined;
+  AnalysisScreen: undefined;
   ProfileScreen: undefined;
 };
 
@@ -34,7 +35,7 @@ export function AppTabNavigation() {
       }}
     >
       <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="AnalyticsScreen" component={AnalysisScreen} />
+      <Tab.Screen name="AnalysisScreen" component={AppAnalysisStack} />
       <Tab.Screen name="TransactionScreen" component={TransactionsScreen} />
       <Tab.Screen name="CategoriesScreen" component={CategoriesScreen} />
       <Tab.Screen name="ProfileScreen" component={ProfileScreen} />

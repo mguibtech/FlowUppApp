@@ -1,15 +1,16 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Box, Text, TextInput, Icon, Button } from '@components';
-import { useNavigation } from '@react-navigation/native';
+import { AuthScreenProps } from '@routes';
 
-export function ForgotPassword() {
-  const navigation = useNavigation();
+export function ForgotPassword({
+  navigation,
+}: AuthScreenProps<'ForgotPassword'>) {
   const handleCreateAccount = () => {
-    navigation.navigate('SignUpScreen' as never);
+    navigation.navigate('SignUpScreen');
   };
   const handleSecurityPin = () => {
-    navigation.navigate('SecurityPinScreen' as never);
+    navigation.navigate('SecurityPinScreen');
   };
   return (
     <KeyboardAvoidingView

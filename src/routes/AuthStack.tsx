@@ -10,7 +10,7 @@ import {
 import React from 'react';
 
 export type AuthStackParamList = {
-  Login: undefined;
+  LoginScreen: undefined;
   SignUpScreen: undefined;
   ForgotPassword: undefined;
   SecurityPinScreen: undefined;
@@ -26,9 +26,9 @@ export function AuthStack() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Login"
+      initialRouteName="LoginScreen"
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="SecurityPinScreen" component={SecurityPinScreen} />

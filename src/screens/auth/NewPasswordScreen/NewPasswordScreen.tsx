@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Box, Button, Text, TextInput, Icon, LoadingScreen } from '@components';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AuthStackParamList } from '@routes';
+import { AuthScreenProps } from '@routes';
 
-type NavigationProp = StackNavigationProp<AuthStackParamList>;
-
-export function NewPasswordScreen() {
-  const navigation = useNavigation<NavigationProp>();
+export function NewPasswordScreen({
+  navigation,
+}: AuthScreenProps<'NewPasswordScreen'>) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -17,9 +14,7 @@ export function NewPasswordScreen() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSavePassword = async () => {
-    // Validações básicas
     if (!password || !confirmPassword) {
-      // Aqui você pode adicionar um alerta de erro
       return;
     }
 
@@ -28,11 +23,8 @@ export function NewPasswordScreen() {
       return;
     }
 
-    // Mostra o loading
     setIsLoading(true);
 
-    // Simula a chamada da API para salvar a senha
-    // Substitua isso pela sua chamada real de API
     setTimeout(() => {
       setIsLoading(false);
       setShowSuccess(true);
@@ -41,10 +33,9 @@ export function NewPasswordScreen() {
 
   const handleAnimationComplete = () => {
     // Navega para a tela de login após mostrar o sucesso
-    navigation.navigate('Login');
+    navigation.navigate('LoginScreen');
   };
 
-  // Se estiver em loading ou sucesso, mostra o LoadingScreen
   if (isLoading) {
     return <LoadingScreen status="loading" message="Salvando nova senha..." />;
   }

@@ -1,10 +1,9 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Box, Button, Icon, Text, TextInput } from '@components';
-import { useNavigation } from '@react-navigation/native';
+import { AuthScreenProps } from '@routes';
 
-export function SignUpScreen() {
-  const navigation = useNavigation();
+export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
