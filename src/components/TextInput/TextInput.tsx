@@ -9,7 +9,7 @@ import { useRef } from 'react';
 import { Box, BoxProps } from '@components';
 
 interface TextInputProps extends RNTextInputProps {
-  label: string;
+  label?: string;
   errorMessage?: string;
   boxProps?: BoxProps;
   leftComponent?: React.ReactElement;

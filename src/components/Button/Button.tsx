@@ -44,7 +44,6 @@ export function Button({
       ) : (
         <Text
           preset="paragraphMedium"
-          bold
           color={buttonPreset.content}
           {...titlePreset}
         >

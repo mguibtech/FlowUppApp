@@ -1,6 +1,7 @@
 export * from './ActivityIndicator/ActivityIndicator';
 export * from './Box/Box';
 export * from './Button/Button';
+export * from './DateInput/DateInput';
 export * from './HeaderAuth/HeaderAuth';
 export * from './Icons/Icon';
 export * from './LoadingScreen/LoadingScreen';
@@ -16,3 +17,4 @@ export * from './BarChart/BarChart';
 export * from './ItemListTransaction/ItemListTransaction';
 export * from './BodyBox/BodyBox';
 export * from './SemiCircularChart/SemiCircularChart';
+export * from './RadioButton/RadioButton';

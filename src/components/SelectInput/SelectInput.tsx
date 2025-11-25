@@ -38,20 +38,15 @@ export function SelectInput<T extends string = string>({
   return (
     <Box marginVertical="s12">
       {label && (
-        <Text
-          marginBottom="s8"
-          color="backgroundContrast"
-          preset="paragraphSmall"
-        >
+        <Text color="backgroundContrast" preset="paragraphSmall">
           {label}
         </Text>
       )}
 
       <Box
-        borderWidth={errorMessage ? 2 : 1}
+        backgroundColor="greenLight"
         borderRadius="s32"
         borderColor="primary"
-        backgroundColor="background"
         paddingHorizontal="s12"
         justifyContent="center"
         alignItems="flex-start"
@@ -80,7 +75,7 @@ export function SelectInput<T extends string = string>({
             }}
             enabled={!disabled}
             style={{
-              color: theme.colors.backgroundContrast,
+              color: theme.colors.greenCyprus,
               fontSize: 14,
               width: '100%',
               marginVertical: -8,

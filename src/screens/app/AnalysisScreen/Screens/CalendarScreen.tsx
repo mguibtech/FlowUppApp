@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import {
@@ -10,10 +10,13 @@ import {
   Icon,
   ItemListTransaction,
   SemiCircularChart,
+  Button,
 } from '@components';
 import type { CategoryData } from '@components';
-import { CategoryType } from '@types';
+import { Transaction } from '@types';
 import { useAppTheme } from '@hooks';
+import { useAnalysisContext } from '../Context';
+import { formatCurrency } from '@utils';
 
 type ViewType = 'spends' | 'categories';
 
@@ -78,18 +81,94 @@ LocaleConfig.defaultLocale = 'pt';
 
 export function CalendarScreen() {
   const { colors } = useAppTheme();
-  const [selectedMonth, setSelectedMonth] = useState(3); // April (0-indexed)
-  const [selectedYear, setSelectedYear] = useState(2023);
+  const { transactions, categories, getTransactionsByDateRange } =
+    useAnalysisContext();
   const [selectedView, setSelectedView] = useState<ViewType>('categories');
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [showYearPicker, setShowYearPicker] = useState(false);
+  const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  // Generate years from 2000 to current year
-  const currentYear = new Date().getFullYear();
-  const years = Array.from(
-    { length: currentYear - 2000 + 1 },
-    (_, i) => 2000 + i,
-  ).reverse();
+  // Extract unique years and months from transactions
+  const availablePeriods = useMemo(() => {
+    const periods = new Map<number, Set<number>>(); // year -> months set
+
+    transactions.forEach(transaction => {
+      const date = new Date(transaction.dateTime);
+      const year = date.getFullYear();
+      const month = date.getMonth(); // 0-indexed
+
+      if (!periods.has(year)) {
+        periods.set(year, new Set());
+      }
+      periods.get(year)!.add(month);
+    });
+
+    // Convert to arrays and sort
+    const years = Array.from(periods.keys()).sort((a, b) => b - a); // Descending
+    const monthsByYear = new Map<number, number[]>();
+    
+    periods.forEach((monthsSet, year) => {
+      monthsByYear.set(year, Array.from(monthsSet).sort((a, b) => a - b));
+    });
+
+    return { years, monthsByYear };
+  }, [transactions]);
+
+  // Initialize selected year and month with first available period
+  const [selectedYear, setSelectedYear] = useState(() => {
+    const periods = new Map<number, Set<number>>();
+    transactions.forEach(transaction => {
+      const date = new Date(transaction.dateTime);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      if (!periods.has(year)) {
+        periods.set(year, new Set());
+      }
+      periods.get(year)!.add(month);
+    });
+    const years = Array.from(periods.keys()).sort((a, b) => b - a);
+    return years.length > 0 ? years[0] : new Date().getFullYear();
+  });
+
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const periods = new Map<number, Set<number>>();
+    transactions.forEach(transaction => {
+      const date = new Date(transaction.dateTime);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      if (!periods.has(year)) {
+        periods.set(year, new Set());
+      }
+      periods.get(year)!.add(month);
+    });
+    const years = Array.from(periods.keys()).sort((a, b) => b - a);
+    const firstYear = years.length > 0 ? years[0] : new Date().getFullYear();
+    const firstYearMonths = periods.get(firstYear);
+    return firstYearMonths && firstYearMonths.size > 0 
+      ? Array.from(firstYearMonths).sort((a, b) => a - b)[0] 
+      : 0;
+  });
+
+  // Get available months for selected year
+  const availableMonths = useMemo(() => {
+    const months = availablePeriods.monthsByYear.get(selectedYear) || [];
+    return months.map(monthIndex => ({
+      index: monthIndex,
+      name: MONTHS[monthIndex],
+    }));
+  }, [selectedYear, availablePeriods]);
+
+  // Update selected month when year changes
+  React.useEffect(() => {
+    const months = availablePeriods.monthsByYear.get(selectedYear);
+    if (months && months.length > 0) {
+      // If current month is not available in new year, select first available
+      if (!months.includes(selectedMonth)) {
+        setSelectedMonth(months[0]);
+      }
+    }
+  }, [selectedYear, availablePeriods, selectedMonth]);
 
   // Format date for Calendar component (YYYY-MM-DD)
   // Use useMemo to recalculate when selectedMonth or selectedYear changes
@@ -98,77 +177,33 @@ export function CalendarScreen() {
     [selectedMonth, selectedYear],
   );
 
-  // Mock transactions data
-  const transactions = [
-    {
-      id: '1',
-      title: 'Groceries',
-      dateTime: '2023-04-24T17:00:00',
-      category: 'groceries' as CategoryType,
-      amount: '-$100,00',
-      isExpense: true,
-    },
-    {
-      id: '2',
-      title: 'Transport',
-      dateTime: '2023-04-24T17:00:00',
-      category: 'transport' as CategoryType,
-      amount: '$50,00',
-      isExpense: true,
-    },
-    {
-      id: '3',
-      title: 'Food',
-      dateTime: '2023-04-24T18:00:00',
-      category: 'food' as CategoryType,
-      amount: '$80,00',
-      isExpense: true,
-    },
-    {
-      id: '4',
-      title: 'Entertainment',
-      dateTime: '2023-04-24T19:00:00',
-      category: 'entertainment' as CategoryType,
-      amount: '$120,00',
-      isExpense: true,
-    },
-    {
-      id: '5',
-      title: 'Salary',
-      dateTime: '2023-04-24T10:00:00',
-      category: 'salary' as CategoryType,
-      amount: '$5000,00',
-      isExpense: false,
-    },
-  ];
+  // Function to handle search/filter
+  const handleSearch = () => {
+    const startDate = new Date(selectedYear, selectedMonth, 1);
+    const endDate = new Date(selectedYear, selectedMonth + 1, 0, 23, 59, 59);
+    const filtered = getTransactionsByDateRange(startDate, endDate);
+    setFilteredTransactions(filtered);
+    setHasSearched(true);
+  };
 
-  // Categories chart data
-  const categoriesData: CategoryData[] = [
-    {
-      label: 'Others',
-      percentage: 20,
-      color: colors.blueOcean, // Dark blue
-      showInLegend: true,
-    },
-    {
-      label: 'transport',
-      percentage: 30,
-      color: colors.blueVivid, // Medium blue
-      showInLegend: true,
-    },
-    {
-      label: 'food',
-      percentage: 10,
-      color: colors.blueVivid, // Medium blue
-      showInLegend: true,
-    },
-    {
-      label: 'entertainment',
-      percentage: 40,
-      color: colors.blueVivid, // Medium blue
-      showInLegend: true,
-    },
-  ];
+  // Format transactions for display
+  const formattedTransactions = useMemo(() => {
+    return filteredTransactions.map(transaction => ({
+      ...transaction,
+      amount: transaction.isExpense
+        ? `-${formatCurrency(transaction.amount)}`
+        : formatCurrency(transaction.amount),
+    }));
+  }, [filteredTransactions]);
+
+  // Use categories from context or default empty array
+  const categoriesData: CategoryData[] = useMemo(() => {
+    if (categories.length > 0) {
+      return categories;
+    }
+    // Default empty categories if none provided
+    return [];
+  }, [categories]);
 
   return (
     <Screen canGoBack title="Calendário" icon="notification">
@@ -251,34 +286,42 @@ export function CalendarScreen() {
                       showsVerticalScrollIndicator={false}
                       style={{ maxHeight: 200 }}
                     >
-                      {MONTHS.map((item, index) => (
-                        <TouchableOpacityBox
-                          key={`month-${item}`}
-                          paddingVertical="s8"
-                          paddingHorizontal="s12"
-                          backgroundColor={
-                            selectedMonth === index ? 'successLight' : 'white'
-                          }
-                          borderRadius="s8"
-                          mb="s4"
-                          onPress={() => {
-                            setSelectedMonth(index);
-                            setShowMonthPicker(false);
-                          }}
-                        >
-                          <Text
-                            color={
-                              selectedMonth === index
-                                ? 'primary'
-                                : 'backgroundContrast'
+                      {availableMonths.length > 0 ? (
+                        availableMonths.map(({ index, name }) => (
+                          <TouchableOpacityBox
+                            key={`month-${index}-${selectedYear}`}
+                            paddingVertical="s8"
+                            paddingHorizontal="s12"
+                            backgroundColor={
+                              selectedMonth === index ? 'successLight' : 'white'
                             }
-                            preset="paragraphMedium"
-                            semibold={selectedMonth === index}
+                            borderRadius="s8"
+                            mb="s4"
+                            onPress={() => {
+                              setSelectedMonth(index);
+                              setShowMonthPicker(false);
+                            }}
                           >
-                            {item}
+                            <Text
+                              color={
+                                selectedMonth === index
+                                  ? 'primary'
+                                  : 'backgroundContrast'
+                              }
+                              preset="paragraphMedium"
+                              semibold={selectedMonth === index}
+                            >
+                              {name}
+                            </Text>
+                          </TouchableOpacityBox>
+                        ))
+                      ) : (
+                        <Box paddingVertical="s8" paddingHorizontal="s12">
+                          <Text color="backgroundContrast" preset="paragraphSmall">
+                            Nenhum mês disponível
                           </Text>
-                        </TouchableOpacityBox>
-                      ))}
+                        </Box>
+                      )}
                     </ScrollView>
                   </Box>
                 )}
@@ -343,34 +386,42 @@ export function CalendarScreen() {
                       showsVerticalScrollIndicator={false}
                       style={{ maxHeight: 200 }}
                     >
-                      {years.map(item => (
-                        <TouchableOpacityBox
-                          key={`year-${item}`}
-                          paddingVertical="s8"
-                          paddingHorizontal="s12"
-                          backgroundColor={
-                            selectedYear === item ? 'successLight' : 'white'
-                          }
-                          borderRadius="s8"
-                          mb="s4"
-                          onPress={() => {
-                            setSelectedYear(item);
-                            setShowYearPicker(false);
-                          }}
-                        >
-                          <Text
-                            color={
-                              selectedYear === item
-                                ? 'primary'
-                                : 'backgroundContrast'
+                      {availablePeriods.years.length > 0 ? (
+                        availablePeriods.years.map(year => (
+                          <TouchableOpacityBox
+                            key={`year-${year}`}
+                            paddingVertical="s8"
+                            paddingHorizontal="s12"
+                            backgroundColor={
+                              selectedYear === year ? 'successLight' : 'white'
                             }
-                            preset="paragraphMedium"
-                            semibold={selectedYear === item}
+                            borderRadius="s8"
+                            mb="s4"
+                            onPress={() => {
+                              setSelectedYear(year);
+                              setShowYearPicker(false);
+                            }}
                           >
-                            {item}
+                            <Text
+                              color={
+                                selectedYear === year
+                                  ? 'primary'
+                                  : 'backgroundContrast'
+                              }
+                              preset="paragraphMedium"
+                              semibold={selectedYear === year}
+                            >
+                              {year}
+                            </Text>
+                          </TouchableOpacityBox>
+                        ))
+                      ) : (
+                        <Box paddingVertical="s8" paddingHorizontal="s12">
+                          <Text color="backgroundContrast" preset="paragraphSmall">
+                            Nenhum ano disponível
                           </Text>
-                        </TouchableOpacityBox>
-                      ))}
+                        </Box>
+                      )}
                     </ScrollView>
                   </Box>
                 )}
@@ -412,6 +463,15 @@ export function CalendarScreen() {
                 paddingLeft: 0,
                 paddingRight: 0,
               }}
+            />
+          </Box>
+
+          {/* Search Button */}
+          <Box marginHorizontal="s24" marginTop="s24" alignItems="center">
+            <Button
+              title="Buscar"
+              width="50%"
+              onPress={handleSearch}
             />
           </Box>
 
@@ -466,23 +526,47 @@ export function CalendarScreen() {
           </Box>
 
           {/* Content based on selected view */}
-          {selectedView === 'spends' ? (
+          {!hasSearched ? (
+            <Box alignItems="center" paddingVertical="s24">
+              <Text color="backgroundContrast" preset="paragraphMedium">
+                Selecione um período e clique em "Buscar" para ver os dados
+              </Text>
+            </Box>
+          ) : selectedView === 'spends' ? (
             /* Transactions List */
             <Box>
-              {transactions.map(transaction => (
-                <ItemListTransaction
-                  key={transaction.id}
-                  title={transaction.title}
-                  dateTime={transaction.dateTime}
-                  category={transaction.category}
-                  amount={transaction.amount}
-                  isExpense={transaction.isExpense}
-                />
-              ))}
+              {formattedTransactions.length > 0 ? (
+                formattedTransactions.map(transaction => (
+                  <ItemListTransaction
+                    key={transaction.id}
+                    title={transaction.title}
+                    dateTime={transaction.dateTime}
+                    category={transaction.category}
+                    amount={transaction.amount}
+                    isExpense={transaction.isExpense}
+                  />
+                ))
+              ) : (
+                <Box alignItems="center" paddingVertical="s24">
+                  <Text color="backgroundContrast" preset="paragraphMedium">
+                    Nenhuma transação encontrada para este período
+                  </Text>
+                </Box>
+              )}
             </Box>
           ) : (
             /* Categories Chart */
-            <SemiCircularChart data={categoriesData} size={300} />
+            <Box>
+              {categoriesData.length > 0 ? (
+                <SemiCircularChart data={categoriesData} size={300} />
+              ) : (
+                <Box alignItems="center" paddingVertical="s24">
+                  <Text color="backgroundContrast" preset="paragraphMedium">
+                    Nenhuma categoria encontrada
+                  </Text>
+                </Box>
+              )}
+            </Box>
           )}
         </ScrollView>
       </BodyBox>

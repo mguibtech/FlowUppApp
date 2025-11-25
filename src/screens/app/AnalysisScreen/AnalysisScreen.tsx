@@ -17,15 +17,34 @@ import {
 } from './Components/PeriodTabsAnalysis';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppAnalysisStackParamList } from '@routes';
+import { useAnalysisContext } from './Context';
 
 export function AnalysisScreen({
   navigation,
 }: NativeStackScreenProps<AppAnalysisStackParamList, 'AnalysisScreen'>) {
+  const { transactions, getTransactionsByType } = useAnalysisContext();
   const [selectedPeriod, setSelectedPeriod] =
     useState<PeriodTypeAnalysis>('daily');
 
-  const income = 4120;
-  const expense = 1187.4;
+  // Calculate income and expense from transactions
+  const { income, expense } = useMemo(() => {
+    const incomeTransactions = getTransactionsByType(false);
+    const expenseTransactions = getTransactionsByType(true);
+
+    const totalIncome = incomeTransactions.reduce(
+      (sum, transaction) => sum + transaction.amount,
+      0,
+    );
+    const totalExpense = expenseTransactions.reduce(
+      (sum, transaction) => sum + transaction.amount,
+      0,
+    );
+
+    return {
+      income: totalIncome || 4120, // Fallback to default if no transactions
+      expense: totalExpense || 1187.4,
+    };
+  }, [transactions, getTransactionsByType]);
 
   // Chart data for the week (Monday to Sunday)
   const chartData: BarData[] = useMemo(

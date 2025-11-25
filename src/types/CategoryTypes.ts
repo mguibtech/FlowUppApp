@@ -1,4 +1,4 @@
-import { IconProps } from '@components';
+import { IconProps, Option } from '@components';
 
 export type CategoryType =
   | 'wedding'
