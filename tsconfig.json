@@ -18,6 +18,7 @@
       "@infra": ["src/infra"],
       "@services": ["src/services"],
       "@assets": ["src/assets"]
-    }
+    },
+    "include": ["src", "src/@types"]
   }
 }
