@@ -17,6 +17,7 @@ import { Transaction } from '@types';
 import { useAppTheme } from '@hooks';
 import { useAnalysisContext } from '../Context';
 import { formatCurrency } from '@utils';
+import { AppAnalysisScreenProps } from '@routes';
 
 type ViewType = 'spends' | 'categories';
 
@@ -79,14 +80,16 @@ LocaleConfig.locales['pt'] = {
 };
 LocaleConfig.defaultLocale = 'pt';
 
-export function CalendarScreen() {
+export function CalendarScreen({}: AppAnalysisScreenProps<'CalendarScreen'>) {
   const { colors } = useAppTheme();
   const { transactions, categories, getTransactionsByDateRange } =
     useAnalysisContext();
   const [selectedView, setSelectedView] = useState<ViewType>('categories');
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [showYearPicker, setShowYearPicker] = useState(false);
-  const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>([]);
+  const [filteredTransactions, setFilteredTransactions] = useState<
+    Transaction[]
+  >([]);
   const [hasSearched, setHasSearched] = useState(false);
 
   // Extract unique years and months from transactions
@@ -107,9 +110,12 @@ export function CalendarScreen() {
     // Convert to arrays and sort
     const years = Array.from(periods.keys()).sort((a, b) => b - a); // Descending
     const monthsByYear = new Map<number, number[]>();
-    
+
     periods.forEach((monthsSet, year) => {
-      monthsByYear.set(year, Array.from(monthsSet).sort((a, b) => a - b));
+      monthsByYear.set(
+        year,
+        Array.from(monthsSet).sort((a, b) => a - b),
+      );
     });
 
     return { years, monthsByYear };
@@ -145,8 +151,8 @@ export function CalendarScreen() {
     const years = Array.from(periods.keys()).sort((a, b) => b - a);
     const firstYear = years.length > 0 ? years[0] : new Date().getFullYear();
     const firstYearMonths = periods.get(firstYear);
-    return firstYearMonths && firstYearMonths.size > 0 
-      ? Array.from(firstYearMonths).sort((a, b) => a - b)[0] 
+    return firstYearMonths && firstYearMonths.size > 0
+      ? Array.from(firstYearMonths).sort((a, b) => a - b)[0]
       : 0;
   });
 
@@ -317,7 +323,10 @@ export function CalendarScreen() {
                         ))
                       ) : (
                         <Box paddingVertical="s8" paddingHorizontal="s12">
-                          <Text color="backgroundContrast" preset="paragraphSmall">
+                          <Text
+                            color="backgroundContrast"
+                            preset="paragraphSmall"
+                          >
                             Nenhum mês disponível
                           </Text>
                         </Box>
@@ -417,7 +426,10 @@ export function CalendarScreen() {
                         ))
                       ) : (
                         <Box paddingVertical="s8" paddingHorizontal="s12">
-                          <Text color="backgroundContrast" preset="paragraphSmall">
+                          <Text
+                            color="backgroundContrast"
+                            preset="paragraphSmall"
+                          >
                             Nenhum ano disponível
                           </Text>
                         </Box>
@@ -468,11 +480,7 @@ export function CalendarScreen() {
 
           {/* Search Button */}
           <Box marginHorizontal="s24" marginTop="s24" alignItems="center">
-            <Button
-              title="Buscar"
-              width="50%"
-              onPress={handleSearch}
-            />
+            <Button title="Buscar" width="50%" onPress={handleSearch} />
           </Box>
 
           {/* Spends/Categories Toggle Buttons */}

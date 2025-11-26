@@ -172,18 +172,17 @@ export function TransactionsScreen() {
               paddingHorizontal="s10"
               paddingVertical="s10"
               alignItems="center"
-              borderWidth={filter === 'income' ? 0 : 1}
               borderColor="blueOcean"
               onPress={handleIncomePress}
             >
               <Icon
                 name="income"
-                color={filter === 'income' ? 'white' : 'blueOcean'}
+                color={filter === 'income' ? 'white' : 'primary'}
                 size={25}
               />
               <Text
                 preset="paragraphSmall"
-                color={filter === 'income' ? 'white' : 'blueOcean'}
+                color={filter === 'income' ? 'white' : undefined}
                 mb="s4"
               >
                 Income
@@ -191,7 +190,7 @@ export function TransactionsScreen() {
               <Text
                 preset="headingSmall"
                 bold
-                color={filter === 'income' ? 'white' : 'blueOcean'}
+                color={filter === 'income' ? 'white' : undefined}
               >
                 {formatCurrency(totalIncome)}
               </Text>
@@ -204,13 +203,12 @@ export function TransactionsScreen() {
               alignItems="center"
               paddingHorizontal="s10"
               paddingVertical="s10"
-              borderWidth={filter === 'expense' ? 0 : 1}
               borderColor="blueOcean"
               onPress={handleExpensePress}
             >
               <Icon
                 name="expense"
-                color={filter === 'expense' ? 'white' : 'blueOcean'}
+                color={filter === 'expense' ? 'white' : 'error'}
                 size={25}
               />
               <Text
@@ -223,7 +221,7 @@ export function TransactionsScreen() {
               <Text
                 preset="headingSmall"
                 bold
-                color={filter === 'expense' ? 'white' : 'blueOcean'}
+                color={filter === 'expense' ? 'white' : 'error'}
               >
                 {formatCurrency(totalExpense)}
               </Text>

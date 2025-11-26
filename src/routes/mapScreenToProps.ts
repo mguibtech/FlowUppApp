@@ -18,7 +18,7 @@ export const mapScreenToProps: Record<
       unfocused: 'home',
     },
   },
-  AnalysisScreen: {
+  AppAnalysisStack: {
     label: 'Análise',
     icon: {
       focused: 'analysisFill',
@@ -33,7 +33,7 @@ export const mapScreenToProps: Record<
       unfocused: 'transaction',
     },
   },
-  CategoriesScreen: {
+  AppCategoryStack: {
     label: 'Categorias',
     icon: {
       focused: 'categoryFill',

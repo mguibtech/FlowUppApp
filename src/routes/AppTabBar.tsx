@@ -74,12 +74,13 @@ export function AppTabBar({
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}
-            mb="s8"
+            mb="s10"
             alignItems="center"
             justifyContent="center"
           >
             <Icon
               name={isFocused ? tabItem.icon.focused : tabItem.icon.unfocused}
+              size={isFocused ? 36 : 26}
             />
           </TouchableOpacityBox>
         );
