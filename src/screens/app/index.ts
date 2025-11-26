@@ -10,6 +10,7 @@ export * from './CategoriesScreen';
 
 export * from './AnalysisScreen';
 export * from './AnalysisScreen/Screens';
+export * from './AnalysisScreen/Context';
 
 export * from './AccountBalanceScreen';
 

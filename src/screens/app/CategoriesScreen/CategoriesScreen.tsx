@@ -12,7 +12,7 @@ import { AppCategoryScreenProps } from '@routes';
 import { FlatList, ListRenderItem } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-type Category = {
+export type Category = {
   id: string;
   name: string;
   label: string;
@@ -55,7 +55,7 @@ export function CategoriesScreen({
       mb="s36"
       onPress={() => {
         if (item.name !== 'more') {
-          navigation.navigate('ListItemsCategoryScreen');
+          navigation.navigate('ListItemsCategoryScreen', { category: item });
         } else {
           navigation.navigate('AddNewCategoryScreen');
         }

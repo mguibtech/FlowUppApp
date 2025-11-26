@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   AddNewCategoryScreen,
   CategoriesScreen,
+  Category,
   ListItemsCategoryScreen,
   NewTransactionScreen,
 } from '@screens';
@@ -9,13 +10,13 @@ import {
 export type AppCategoryStackParamList = {
   CategoriesScreen: undefined;
   AddNewCategoryScreen: undefined;
-  ListItemsCategoryScreen: undefined;
+  ListItemsCategoryScreen: { category: Category };
   NewTransactionScreen: undefined;
 };
 
-export function AppCategoryStack() {
-  const Stack = createNativeStackNavigator<AppCategoryStackParamList>();
+const Stack = createNativeStackNavigator<AppCategoryStackParamList>();
 
+export function AppCategoryStack() {
   return (
     <Stack.Navigator
       screenOptions={{
