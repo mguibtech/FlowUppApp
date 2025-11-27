@@ -2,12 +2,12 @@ import React from 'react';
 import Svg, { Circle } from 'react-native-svg';
 import { View } from 'react-native';
 
-import { Icon } from '@components';
+import { Icon, IconProps } from '@components';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
 
 export interface CircularIconProps {
-  readonly iconName: string;
+  readonly iconName: IconProps['name'];
   readonly size?: number;
   readonly backgroundColor?: ThemeColors;
   readonly iconColor?: ThemeColors;
@@ -49,4 +49,3 @@ export function CircularIcon({
     </View>
   );
 }
-

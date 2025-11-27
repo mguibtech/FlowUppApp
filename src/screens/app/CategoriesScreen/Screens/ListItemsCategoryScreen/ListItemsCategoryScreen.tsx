@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ExpensePercentageBar,
+  Icon,
   ItemListTransaction,
   Screen,
   Text,
@@ -109,9 +110,45 @@ export function ListItemsCategoryScreen({
           )}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: bottom + 20, marginTop: 12 }}
+          contentContainerStyle={{
+            paddingBottom: bottom + 20,
+            marginTop: 12,
+            flexGrow: sections.length === 0 ? 1 : 0,
+          }}
+          ListEmptyComponent={() => (
+            <Box
+              flex={1}
+              alignItems="center"
+              justifyContent="center"
+              paddingHorizontal="s24"
+            >
+              <Icon name="category" size={72} color="primary" />
+
+              <Text
+                preset="headingSmall"
+                semibold
+                marginTop="s16"
+                textAlign="center"
+                color="primaryContrast"
+              >
+                Nenhuma transação por aqui ainda
+              </Text>
+
+              <Text
+                preset="paragraphSmall"
+                marginTop="s8"
+                marginBottom="s24"
+                textAlign="center"
+                color="primaryContrast"
+              >
+                Comece adicionando uma nova transação para acompanhar seus
+                gastos dessa categoria.
+              </Text>
+            </Box>
+          )}
         />
-        <Box alignItems="center" justifyContent="center" mt="s10" mb="s24">
+
+        <Box alignItems="center" justifyContent="center" mt="s10" mb="s44">
           <Button
             title="Nova transação"
             onPress={handleNewTransaction}

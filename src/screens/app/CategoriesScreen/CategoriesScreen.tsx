@@ -9,8 +9,10 @@ import {
   TouchableOpacityBox,
 } from '@components';
 import { AppCategoryScreenProps } from '@routes';
+import { useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { NewCategoryModal } from './Components/NewCategoryModal/NewCategoryModal';
 
 export type Category = {
   id: string;
@@ -25,6 +27,8 @@ export function CategoriesScreen({
   const income = 1000;
   const expense = 500;
   const { bottom } = useSafeAreaInsets();
+
+  const [newCategoryModalVisible, setNewCategoryModalVisible] = useState(false);
 
   const categories: Category[] = [
     { id: '1', name: 'food', label: 'Food', icon: 'foodDefault' },
@@ -57,7 +61,7 @@ export function CategoriesScreen({
         if (item.name !== 'more') {
           navigation.navigate('ListItemsCategoryScreen', { category: item });
         } else {
-          navigation.navigate('AddNewCategoryScreen');
+          setNewCategoryModalVisible(true);
         }
       }}
     >
@@ -82,8 +86,22 @@ export function CategoriesScreen({
           keyExtractor={(item: Category) => item.id}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: bottom + 20, marginTop: 12 }}
+          ListEmptyComponent={() => (
+            <Box flex={1} alignItems="center" justifyContent="center" mt="s32">
+              <Text preset="paragraphMedium" color="primaryContrast" semibold>
+                Lista vazia
+              </Text>
+            </Box>
+          )}
         />
       </BodyBox>
+      <NewCategoryModal
+        visible={newCategoryModalVisible}
+        onClose={() => setNewCategoryModalVisible(false)}
+        onConfirm={data => {
+          console.log(data);
+        }}
+      />
     </Screen>
   );
 }

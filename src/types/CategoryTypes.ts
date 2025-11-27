@@ -1,22 +1,22 @@
 import { IconProps, Option } from '@components';
 
 export type CategoryType =
-  | 'wedding'
-  | 'car'
-  | 'newHome'
-  | 'travel'
-  | 'more'
-  | 'saving'
-  | 'entertainment'
   | 'food'
-  | 'medicine'
-  | 'gift'
-  | 'rent'
-  | 'groceries'
   | 'transport'
-  | 'salary';
+  | 'groceries'
+  | 'rent'
+  | 'gift'
+  | 'medicine'
+  | 'entertainment'
+  | 'saving'
+  | 'more'
+  | 'travel'
+  | 'newHome'
+  | 'car'
+  | 'wedding';
 
 export const categoryIconName: Record<CategoryType, IconProps['name']> = {
+  food: 'foodDefault',
   wedding: 'weddingDefault',
   car: 'carDefault',
   newHome: 'newHomeDefault',
@@ -24,11 +24,9 @@ export const categoryIconName: Record<CategoryType, IconProps['name']> = {
   more: 'moreDefault',
   saving: 'savingDefault',
   entertainment: 'entertainmentDefault',
-  food: 'foodDefault',
   medicine: 'medicineDefault',
   gift: 'giftDefault',
   rent: 'rentDefault',
   groceries: 'groceriesDefault',
   transport: 'transportDefault',
-  salary: 'carDefault',
 };
