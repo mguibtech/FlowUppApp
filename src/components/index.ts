@@ -18,3 +18,4 @@ export * from './ItemListTransaction/ItemListTransaction';
 export * from './BodyBox/BodyBox';
 export * from './SemiCircularChart/SemiCircularChart';
 export * from './RadioButton/RadioButton';
+export * from './ObservationInput/ObservationInput';

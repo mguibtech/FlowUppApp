@@ -81,6 +81,5 @@ export const $textInputStyle: TextStyle = {
   flexShrink: 1,
   color: theme.colors.greenDark,
   fontFamily: $fontFamily.regular,
-  fontWeight: 'bold',
   ...$fontSizes.paragraphMedium,
 };

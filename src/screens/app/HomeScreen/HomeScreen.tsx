@@ -66,29 +66,28 @@ export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
 
   return (
     <Screen title="Bem-vindo de volta!" icon="notification" subtitle="Bom dia">
-      <Box flex={1}>
-        <HeaderBalanceShort />
-        <BodyBox>
-          <HomeResumeGoals />
+      <HeaderBalanceShort />
+      <BodyBox flex={1}>
+        <FlatList
+          data={transactions}
+          renderItem={renderTransactionItem}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 16 }}
+          ListHeaderComponent={
+            <>
+              <HomeResumeGoals />
 
-          {/* Period Tabs */}
-          <Box marginTop="s8" marginBottom="s16">
-            <PeriodTabs
-              selectedPeriod={selectedPeriod}
-              onPeriodChange={setSelectedPeriod}
-            />
-          </Box>
-
-          {/* Transaction Items List */}
-          <FlatList
-            data={transactions}
-            renderItem={renderTransactionItem}
-            keyExtractor={item => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 16 }}
-          />
-        </BodyBox>
-      </Box>
+              <Box marginTop="s8" marginBottom="s16">
+                <PeriodTabs
+                  selectedPeriod={selectedPeriod}
+                  onPeriodChange={setSelectedPeriod}
+                />
+              </Box>
+            </>
+          }
+        />
+      </BodyBox>
     </Screen>
   );
 }

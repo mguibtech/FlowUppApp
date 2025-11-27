@@ -91,7 +91,7 @@ export function ListItemsCategoryScreen({
       <Box marginHorizontal="s32" mt="s16">
         <ExpensePercentageBar income={income} expense={expense} />
       </Box>
-      <BodyBox>
+      <BodyBox flex={1}>
         <SectionList
           sections={sections}
           renderItem={({ item }) => (

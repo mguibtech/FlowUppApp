@@ -73,7 +73,7 @@ export function CategoriesScreen({
       <Box marginHorizontal="s32" mt="s16">
         <ExpensePercentageBar income={income} expense={expense} />
       </Box>
-      <BodyBox>
+      <BodyBox flex={1}>
         <FlatList
           data={categories}
           numColumns={3}

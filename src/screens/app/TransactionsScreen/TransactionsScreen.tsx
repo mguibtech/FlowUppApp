@@ -11,6 +11,7 @@ import { formatCurrency } from '@utils';
 import { CategoryType } from '@types';
 import { SectionList } from 'react-native';
 import { useState, useMemo } from 'react';
+import { useAppSafeArea } from '@hooks';
 
 interface Transaction {
   id: string;
@@ -116,7 +117,7 @@ type FilterType = 'all' | 'income' | 'expense';
 
 export function TransactionsScreen() {
   const [filter, setFilter] = useState<FilterType>('all');
-
+  const { bottom } = useAppSafeArea();
   const handleIncomePress = () => {
     setFilter(filter === 'income' ? 'all' : 'income');
   };
@@ -141,130 +142,123 @@ export function TransactionsScreen() {
   }, [filter]);
   return (
     <Screen canGoBack title="Transaction" icon="notification">
-      <Box flex={1}>
-        <Box mt="s20">
-          <Box
-            backgroundColor="white"
+      <Box mt="s20">
+        <Box
+          backgroundColor="white"
+          borderRadius="s16"
+          padding="s10"
+          mb="s20"
+          alignItems="center"
+          marginHorizontal="s32"
+        >
+          <Text preset="paragraphSmall" color="backgroundContrast">
+            Total Balance
+          </Text>
+          <Text preset="headingMedium" bold color="backgroundContrast" mt="s4">
+            {formatCurrency(totalBalance)}
+          </Text>
+        </Box>
+
+        <Box flexDirection="row" gap="s12" marginHorizontal="s32" mb="s20">
+          <TouchableOpacityBox
+            flex={1}
+            backgroundColor={filter === 'income' ? 'blueOcean' : 'white'}
             borderRadius="s16"
-            padding="s10"
-            mb="s20"
+            paddingHorizontal="s10"
+            paddingVertical="s10"
             alignItems="center"
-            marginHorizontal="s32"
+            borderColor="blueOcean"
+            onPress={handleIncomePress}
           >
-            <Text preset="paragraphSmall" color="backgroundContrast">
-              Total Balance
+            <Icon
+              name="income"
+              color={filter === 'income' ? 'white' : 'primary'}
+              size={25}
+            />
+            <Text
+              preset="paragraphSmall"
+              color={filter === 'income' ? 'white' : undefined}
+              mb="s4"
+            >
+              Income
             </Text>
             <Text
-              preset="headingMedium"
+              preset="headingSmall"
               bold
-              color="backgroundContrast"
-              mt="s4"
+              color={filter === 'income' ? 'white' : undefined}
             >
-              {formatCurrency(totalBalance)}
+              {formatCurrency(totalIncome)}
             </Text>
-          </Box>
+          </TouchableOpacityBox>
 
-          <Box flexDirection="row" gap="s12" marginHorizontal="s32" mb="s20">
-            <TouchableOpacityBox
-              flex={1}
-              backgroundColor={filter === 'income' ? 'blueOcean' : 'white'}
-              borderRadius="s16"
-              paddingHorizontal="s10"
-              paddingVertical="s10"
-              alignItems="center"
-              borderColor="blueOcean"
-              onPress={handleIncomePress}
-            >
-              <Icon
-                name="income"
-                color={filter === 'income' ? 'white' : 'primary'}
-                size={25}
-              />
-              <Text
-                preset="paragraphSmall"
-                color={filter === 'income' ? 'white' : undefined}
-                mb="s4"
-              >
-                Income
-              </Text>
-              <Text
-                preset="headingSmall"
-                bold
-                color={filter === 'income' ? 'white' : undefined}
-              >
-                {formatCurrency(totalIncome)}
-              </Text>
-            </TouchableOpacityBox>
-
-            <TouchableOpacityBox
-              flex={1}
-              backgroundColor={filter === 'expense' ? 'blueOcean' : 'white'}
-              borderRadius="s16"
-              alignItems="center"
-              paddingHorizontal="s10"
-              paddingVertical="s10"
-              borderColor="blueOcean"
-              onPress={handleExpensePress}
-            >
-              <Icon
-                name="expense"
-                color={filter === 'expense' ? 'white' : 'error'}
-                size={25}
-              />
-              <Text
-                preset="paragraphSmall"
-                color={filter === 'expense' ? 'white' : 'blueOcean'}
-                mb="s4"
-              >
-                Expense
-              </Text>
-              <Text
-                preset="headingSmall"
-                bold
-                color={filter === 'expense' ? 'white' : 'error'}
-              >
-                {formatCurrency(totalExpense)}
-              </Text>
-            </TouchableOpacityBox>
-          </Box>
-        </Box>
-        <BodyBox>
-          <Box flex={1}>
-            <SectionList
-              sections={filteredTransactions}
-              keyExtractor={(item, index) => item.id || index.toString()}
-              renderItem={({ item }) => (
-                <ItemListTransaction
-                  title={item.title}
-                  dateTime={item.dateTime}
-                  category={item.category}
-                  amount={formatCurrency(item.amount)}
-                  isExpense={item.isExpense}
-                />
-              )}
-              renderSectionHeader={({ section }) => (
-                <Box
-                  flexDirection="row"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  mb="s16"
-                  mt="s32"
-                >
-                  <Text
-                    preset="paragraphMedium"
-                    semibold
-                    color="backgroundContrast"
-                  >
-                    {section.month}
-                  </Text>
-                </Box>
-              )}
-              contentContainerStyle={{ paddingBottom: 20 }}
-              showsVerticalScrollIndicator={false}
+          <TouchableOpacityBox
+            flex={1}
+            backgroundColor={filter === 'expense' ? 'blueOcean' : 'white'}
+            borderRadius="s16"
+            alignItems="center"
+            paddingHorizontal="s10"
+            paddingVertical="s10"
+            borderColor="blueOcean"
+            onPress={handleExpensePress}
+          >
+            <Icon
+              name="expense"
+              color={filter === 'expense' ? 'white' : 'error'}
+              size={25}
             />
-          </Box>
-        </BodyBox>
+            <Text
+              preset="paragraphSmall"
+              color={filter === 'expense' ? 'white' : 'blueOcean'}
+              mb="s4"
+            >
+              Expense
+            </Text>
+            <Text
+              preset="headingSmall"
+              bold
+              color={filter === 'expense' ? 'white' : 'error'}
+            >
+              {formatCurrency(totalExpense)}
+            </Text>
+          </TouchableOpacityBox>
+        </Box>
       </Box>
+      <BodyBox flex={1}>
+        <SectionList
+          sections={filteredTransactions}
+          keyExtractor={(item, index) => item.id || index.toString()}
+          renderItem={({ item }) => (
+            <ItemListTransaction
+              title={item.title}
+              dateTime={item.dateTime}
+              category={item.category}
+              amount={formatCurrency(item.amount)}
+              isExpense={item.isExpense}
+            />
+          )}
+          renderSectionHeader={({ section }) => (
+            <Box
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-between"
+              mb="s16"
+              mt="s32"
+            >
+              <Text
+                preset="paragraphMedium"
+                semibold
+                color="backgroundContrast"
+              >
+                {section.month}
+              </Text>
+            </Box>
+          )}
+          contentContainerStyle={{
+            paddingBottom: 20 + bottom,
+          }}
+          showsVerticalScrollIndicator={false}
+        />
+      </BodyBox>
     </Screen>
   );
 }

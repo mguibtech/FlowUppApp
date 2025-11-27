@@ -69,7 +69,7 @@ export function AnalysisScreen({
   );
 
   return (
-    <Screen title="Analysis" icon="notification">
+    <Screen scrollable title="Analysis" icon="notification">
       <Box marginHorizontal="s32" mt="s16">
         <ExpensePercentageBar income={income} expense={expense} />
       </Box>

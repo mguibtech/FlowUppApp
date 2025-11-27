@@ -39,14 +39,7 @@ export function Screen({
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <Container backgroundColor={colors.primary}>
-        <Box
-          flex={1}
-          // paddingHorizontal="s24"
-          style={[{ paddingTop: top }, style]}
-          // style={[{ paddingTop: top, paddingBottom: bottom }, style]}
-
-          {...boxProps}
-        >
+        <Box flex={1} style={[{ paddingTop: top }, style]} {...boxProps}>
           <ScreenHeader
             canGoBack={canGoBack}
             title={title}

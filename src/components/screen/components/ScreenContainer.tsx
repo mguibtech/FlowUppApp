@@ -10,6 +10,7 @@ export function ScrollViewContainer({ children, backgroundColor }: Props) {
     <ScrollView
       keyboardShouldPersistTaps="handled"
       style={{ backgroundColor, flex: 1 }}
+      contentContainerStyle={{ flexGrow: 1 }}
     >
       {children}
     </ScrollView>

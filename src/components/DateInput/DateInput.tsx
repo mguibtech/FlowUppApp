@@ -85,7 +85,7 @@ export function DateInput({
   return (
     <Box {...boxProps}>
       {label && (
-        <Text color="backgroundContrast" preset="paragraphSmall">
+        <Text paddingStart="s20" semibold>
           {label}
         </Text>
       )}
