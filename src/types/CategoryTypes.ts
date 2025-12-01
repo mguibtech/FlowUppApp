@@ -1,5 +1,16 @@
 import { IconProps, Option } from '@components';
 
+export type DefaultCategories =
+  | 'food'
+  | 'transport'
+  | 'medicine'
+  | 'groceries'
+  | 'rent'
+  | 'gift'
+  | 'saving'
+  | 'entertainment'
+  | 'more';
+
 export type CategoryType =
   | 'food'
   | 'transport'

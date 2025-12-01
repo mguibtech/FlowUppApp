@@ -1,8 +1,8 @@
 import { IconProps } from '@components';
-import { CategoryType } from '@types';
+import { DefaultCategories } from '@types';
 
 export const mapCategoryToProps: Record<
-  CategoryType,
+  DefaultCategories,
   {
     label: string;
     icon: {
@@ -18,43 +18,43 @@ export const mapCategoryToProps: Record<
       unfocused: 'foodDefault',
     },
   },
-  wedding: {
-    label: 'Casamento',
+  transport: {
+    label: 'Transporte',
     icon: {
-      focused: 'weddingPressed',
-      unfocused: 'weddingDefault',
+      focused: 'transportPressed',
+      unfocused: 'transportDefault',
     },
   },
-  car: {
-    label: 'Carro',
+  medicine: {
+    label: 'Medicamento',
     icon: {
-      focused: 'carPressed',
-      unfocused: 'carDefault',
+      focused: 'medicinePressed',
+      unfocused: 'medicineDefault',
     },
   },
-  newHome: {
-    label: 'Nova Casa',
+  groceries: {
+    label: 'Mercado',
     icon: {
-      focused: 'newHomePressed',
-      unfocused: 'newHomeDefault',
+      focused: 'groceriesPressed',
+      unfocused: 'groceriesDefault',
     },
   },
-  travel: {
-    label: 'Viagem',
+  rent: {
+    label: 'Pagamentos',
     icon: {
-      focused: 'travelPressed',
-      unfocused: 'travelDefault',
+      focused: 'rentPressed',
+      unfocused: 'rentDefault',
     },
   },
-  more: {
-    label: 'Mais',
+  gift: {
+    label: 'Presentes',
     icon: {
-      focused: 'morePressed',
-      unfocused: 'moreDefault',
+      focused: 'giftPressed',
+      unfocused: 'giftDefault',
     },
   },
   saving: {
-    label: 'Economia',
+    label: 'Economias',
     icon: {
       focused: 'savingPressed',
       unfocused: 'savingDefault',
@@ -67,39 +67,11 @@ export const mapCategoryToProps: Record<
       unfocused: 'entertainmentDefault',
     },
   },
-  medicine: {
-    label: 'Medicamento',
+  more: {
+    label: 'Mais',
     icon: {
-      focused: 'medicinePressed',
-      unfocused: 'medicineDefault',
-    },
-  },
-  gift: {
-    label: 'Presente',
-    icon: {
-      focused: 'giftPressed',
-      unfocused: 'giftDefault',
-    },
-  },
-  rent: {
-    label: 'Aluguel',
-    icon: {
-      focused: 'rentPressed',
-      unfocused: 'rentDefault',
-    },
-  },
-  groceries: {
-    label: 'Compras',
-    icon: {
-      focused: 'groceriesPressed',
-      unfocused: 'groceriesDefault',
-    },
-  },
-  transport: {
-    label: 'Transporte',
-    icon: {
-      focused: 'transportPressed',
-      unfocused: 'transportDefault',
+      focused: 'morePressed',
+      unfocused: 'moreDefault',
     },
   },
 };

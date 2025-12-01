@@ -13,12 +13,15 @@ import { useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NewCategoryModal } from './Components/NewCategoryModal/NewCategoryModal';
+import { mapCategoryToProps } from './Components/mapCategoryToProps';
 
 export type Category = {
   id: string;
-  name: string;
   label: string;
-  icon: IconProps['name'];
+  icon: {
+    focused: IconProps['name'];
+    unfocused: IconProps['name'];
+  };
 };
 
 export function CategoriesScreen({
@@ -29,43 +32,22 @@ export function CategoriesScreen({
   const { bottom } = useSafeAreaInsets();
 
   const [newCategoryModalVisible, setNewCategoryModalVisible] = useState(false);
-
-  const categories: Category[] = [
-    { id: '1', name: 'food', label: 'Food', icon: 'foodDefault' },
-    { id: '2', name: 'transport', label: 'Transport', icon: 'carDefault' },
-    {
-      id: '3',
-      name: 'entertainment',
-      label: 'Entertainment',
-      icon: 'giftDefault',
-    },
-    { id: '4', name: 'other', label: 'Other', icon: 'medicineDefault' },
-    { id: '5', name: 'food', label: 'Food', icon: 'foodDefault' },
-    { id: '6', name: 'transport', label: 'Transport', icon: 'carDefault' },
-    {
-      id: '7',
-      name: 'entertainment',
-      label: 'Entertainment',
-      icon: 'giftDefault',
-    },
-    { id: '8', name: 'other', label: 'Other', icon: 'medicineDefault' },
-    { id: '9', name: 'more', label: 'More', icon: 'moreDefault' },
-  ];
+  const categories = Object.values(mapCategoryToProps) as Category[];
 
   const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
     <TouchableOpacityBox
       alignItems="center"
       justifyContent="center"
-      mb="s36"
+      marginBottom="s12"
       onPress={() => {
-        if (item.name !== 'more') {
+        if (item.label !== 'Mais') {
           navigation.navigate('ListItemsCategoryScreen', { category: item });
         } else {
           setNewCategoryModalVisible(true);
         }
       }}
     >
-      <Icon name={item.icon} size={90} color="white" />
+      <Icon name={item.icon.unfocused} size={90} color="white" />
       <Text preset="paragraphMedium" semibold>
         {item.label}
       </Text>
@@ -81,9 +63,9 @@ export function CategoriesScreen({
         <FlatList
           data={categories}
           numColumns={3}
-          columnWrapperStyle={{ justifyContent: 'space-between' }}
+          columnWrapperStyle={{ justifyContent: 'space-between', gap: 12 }}
           renderItem={renderCategoryItem}
-          keyExtractor={(item: Category) => item.id}
+          keyExtractor={(item, index) => `${item.label}-${index}`}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: bottom + 20, marginTop: 12 }}
           ListEmptyComponent={() => (

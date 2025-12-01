@@ -3,26 +3,25 @@ import { Modal, TouchableWithoutFeedback, FlatList } from 'react-native';
 
 import { Box, Text, Button, TextInput, Icon } from '@components';
 import { IconProps } from '@components';
-import { CategoryType } from '@types';
+import { DefaultCategories } from '@types';
 import { mapCategoryToProps } from '../mapCategoryToProps';
 
 export interface NewCategoryModalProps {
   readonly visible: boolean;
   readonly onClose: () => void;
   readonly onConfirm: (data: { name: string; icon: IconProps['name'] }) => void;
-  readonly availableCategories?: ReadonlyArray<CategoryType>;
+  readonly availableCategories?: ReadonlyArray<DefaultCategories>;
 }
 
 export function NewCategoryModal({
   visible,
   onClose,
   onConfirm,
-  availableCategories = Object.keys(mapCategoryToProps) as CategoryType[], // ['food', 'wedding', ...]
+  availableCategories = Object.keys(mapCategoryToProps) as DefaultCategories[],
 }: NewCategoryModalProps) {
   const [name, setName] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(
-    null,
-  );
+  const [selectedCategory, setSelectedCategory] =
+    useState<DefaultCategories | null>(null);
 
   const canConfirm = name.trim().length > 0 && !!selectedCategory;
 
