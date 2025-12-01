@@ -4,6 +4,8 @@ import {
   Category,
   ListItemsCategoryScreen,
   NewTransactionScreen,
+  SavingsListScreen,
+  SavingsScreen,
 } from '@screens';
 import { DefaultCategories } from '@types';
 
@@ -14,6 +16,8 @@ export type AppCategoryStackParamList = {
   NewTransactionScreen: {
     categories: DefaultCategories | DefaultCategories[];
   };
+  SavingsScreen: undefined;
+  SavingsListScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppCategoryStackParamList>();
@@ -35,6 +39,8 @@ export function AppCategoryStack() {
         name="NewTransactionScreen"
         component={NewTransactionScreen}
       />
+      <Stack.Screen name="SavingsScreen" component={SavingsScreen} />
+      <Stack.Screen name="SavingsListScreen" component={SavingsListScreen} />
     </Stack.Navigator>
   );
 }

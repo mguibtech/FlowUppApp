@@ -13,7 +13,7 @@ import {
   Text,
   TextInput,
 } from '@components';
-import { CategoryType } from '@types';
+import { DefaultCategories } from '@types';
 import { useAnalysisContext } from '../Context';
 import { FlatList } from 'react-native';
 import { formatCurrency, formatDate } from '@utils';
@@ -26,9 +26,8 @@ export function SearchScreen() {
   const { transactions, getTransactionsByType } = useAnalysisContext();
   const { bottom } = useAppSafeArea();
   const [reportType, setReportType] = useState<ReportType | null>('expense');
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(
-    null,
-  );
+  const [selectedCategory, setSelectedCategory] =
+    useState<DefaultCategories | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const [searchText, setSearchText] = useState('');
@@ -108,28 +107,20 @@ export function SearchScreen() {
       }
     }
   };
-  const categoryLabels: Record<CategoryType, string> = {
-    wedding: 'Casamento',
-    car: 'Carro',
-    newHome: 'Casa Nova',
-    travel: 'Viagem',
+
+  const categoryLabels: Record<DefaultCategories, string> = {
     more: 'Mais',
     saving: 'Poupança',
     entertainment: 'Entretenimento',
-    food: 'Comida',
-    medicine: 'Medicina',
-    gift: 'Presente',
-    rent: 'Aluguel',
     groceries: 'Mercado',
+    food: 'Alimentação',
     transport: 'Transporte',
-    salary: 'Salário',
+    rent: 'Aluguel',
+    gift: 'Presente',
+    medicine: 'Medicina',
   };
 
-  const categoryOptions: ReadonlyArray<Option<CategoryType>> = [
-    { label: categoryLabels.wedding, value: 'wedding' },
-    { label: categoryLabels.car, value: 'car' },
-    { label: categoryLabels.newHome, value: 'newHome' },
-    { label: categoryLabels.travel, value: 'travel' },
+  const categoryOptions: ReadonlyArray<Option<DefaultCategories>> = [
     { label: categoryLabels.more, value: 'more' },
     { label: categoryLabels.saving, value: 'saving' },
     { label: categoryLabels.entertainment, value: 'entertainment' },
@@ -139,7 +130,6 @@ export function SearchScreen() {
     { label: categoryLabels.rent, value: 'rent' },
     { label: categoryLabels.groceries, value: 'groceries' },
     { label: categoryLabels.transport, value: 'transport' },
-    { label: categoryLabels.salary, value: 'salary' },
   ] as const;
 
   // Filter transactions based on search criteria
@@ -216,7 +206,7 @@ export function SearchScreen() {
         onChangeText={setSearchText}
       />
 
-      <BodyBox>
+      <BodyBox flex={1}>
         <SelectInput
           label="Categorias"
           items={categoryOptions}

@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Box, Icon, Text, TouchableOpacityBox } from '@components';
-import { CategoryType, categoryIconName } from '@types';
+import { DefaultCategories, categoryIconName } from '@types';
 import { formatDatePtBr, formatMonthPtBr, formatTime } from '@utils';
 
 export interface ItemListTransactionProps {
   title: string;
   dateTime: string; // ex: "18:27 - April 30"
-  category: CategoryType;
+  category: DefaultCategories | string;
   amount: string; // ex: "$4.000,00" or "-$100,00"
   isExpense?: boolean; // se true, mostra em azul claro (expense)
   onPress?: () => void;
@@ -21,7 +21,11 @@ export function ItemListTransaction({
   isExpense = false,
   onPress,
 }: Readonly<ItemListTransactionProps>) {
-  const iconName = categoryIconName[category];
+  // Use categoryIconName if category exists, otherwise use a default icon
+  const iconName =
+    category in categoryIconName
+      ? categoryIconName[category as DefaultCategories]
+      : 'moreDefault';
 
   const Content = (
     <TouchableOpacityBox

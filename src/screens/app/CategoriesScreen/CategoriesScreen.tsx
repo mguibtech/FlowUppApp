@@ -34,10 +34,15 @@ export function CategoriesScreen({
   const { bottom } = useSafeAreaInsets();
 
   const [newCategoryModalVisible, setNewCategoryModalVisible] = useState(false);
-  const categories: Category[] = (Object.entries(mapCategoryToProps) as [
-    DefaultCategories,
-    { label: string; icon: { focused: IconProps['name']; unfocused: IconProps['name'] } },
-  ][]).map(([value, props]) => ({
+  const categories: Category[] = (
+    Object.entries(mapCategoryToProps) as [
+      DefaultCategories,
+      {
+        label: string;
+        icon: { focused: IconProps['name']; unfocused: IconProps['name'] };
+      },
+    ][]
+  ).map(([value, props]) => ({
     id: value,
     label: props.label,
     value: value,
@@ -50,11 +55,18 @@ export function CategoriesScreen({
       justifyContent="center"
       marginBottom="s12"
       onPress={() => {
-        console.log(item);
-        if (item.label !== 'Mais') {
-          navigation.navigate('ListItemsCategoryScreen', { category: item });
-        } else {
+        if (
+          item.value ===
+          categories.find(category => category.value === 'saving')?.value
+        ) {
+          navigation.navigate('SavingsScreen');
+        } else if (
+          item.value ===
+          categories.find(category => category.value === 'more')?.value
+        ) {
           setNewCategoryModalVisible(true);
+        } else {
+          navigation.navigate('ListItemsCategoryScreen', { category: item });
         }
       }}
     >

@@ -1,5 +1,7 @@
 import { IconProps } from '@components';
 
+export type DefaultSavings = 'transport' | 'newHouse' | 'car' | 'health';
+
 export type DefaultCategories =
   | 'food'
   | 'transport'

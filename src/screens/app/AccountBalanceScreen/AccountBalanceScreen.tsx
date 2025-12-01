@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { FlatList, Pressable } from 'react-native';
 import { Box, Icon, Screen, Text } from '@components';
 import { AccountHeader } from './Components/AccountHeader/AccountHeader';
-import { categoryIconName, CategoryType } from '@types';
+import { categoryIconName, DefaultCategories } from '@types';
 
 interface Transaction {
   id: number;
@@ -10,7 +10,7 @@ interface Transaction {
   amount: number;
   date: string;
   type: 'income' | 'expense';
-  category: CategoryType;
+  category: DefaultCategories;
 }
 
 function TransactionItem({ item }: { item: Transaction }) {
@@ -29,7 +29,7 @@ function TransactionItem({ item }: { item: Transaction }) {
     minute: '2-digit',
   });
 
-  const iconCategoryName = categoryIconName[item.category];
+  const iconCategoryName = categoryIconName[item.category as DefaultCategories];
 
   return (
     <Box
@@ -105,14 +105,6 @@ export function AccountBalanceScreen() {
       date: '2025-01-01',
       type: 'expense',
       category: 'gift',
-    },
-    {
-      id: 3,
-      name: 'Transação 3',
-      amount: 100,
-      date: '2025-01-01',
-      type: 'expense',
-      category: 'salary',
     },
     {
       id: 4,

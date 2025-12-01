@@ -8,7 +8,7 @@ import {
   TouchableOpacityBox,
 } from '@components';
 import { formatCurrency } from '@utils';
-import { CategoryType } from '@types';
+import { DefaultCategories } from '@types';
 import { SectionList } from 'react-native';
 import { useState, useMemo } from 'react';
 import { useAppSafeArea } from '@hooks';
@@ -17,7 +17,7 @@ interface Transaction {
   id: string;
   title: string;
   dateTime: string;
-  category: CategoryType;
+  category: DefaultCategories | string;
   amount: number;
   isExpense: boolean;
 }
