@@ -10,7 +10,7 @@ import {
 } from '@components';
 import { AppCategoryScreenProps } from '@routes';
 import { mockTransactions } from '@screens';
-import { CategoryType, Transaction } from '@types';
+import { DefaultCategories, Transaction } from '@types';
 import { formatCurrency } from '@utils';
 import { SectionList } from 'react-native';
 import { useAppSafeArea } from '@hooks';
@@ -34,7 +34,7 @@ export function ListItemsCategoryScreen({
 
   useEffect(() => {
     const filtered = mockTransactions.filter(
-      transaction => transaction.category === category.name,
+      transaction => transaction.category === category.label,
     );
 
     setTransactions(filtered);
@@ -84,7 +84,10 @@ export function ListItemsCategoryScreen({
   }, [transactions]);
 
   function handleNewTransaction() {
-    navigation.navigate('NewTransactionScreen');
+    console.log(category);
+    navigation.navigate('NewTransactionScreen', {
+      categories: [category.value],
+    });
   }
 
   return (
@@ -99,7 +102,7 @@ export function ListItemsCategoryScreen({
             <ItemListTransaction
               title={item.title}
               amount={formatCurrency(item.amount)}
-              category={item.category as CategoryType}
+              category={item.category}
               dateTime={item.dateTime}
             />
           )}

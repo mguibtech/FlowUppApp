@@ -14,10 +14,12 @@ import { FlatList, ListRenderItem } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NewCategoryModal } from './Components/NewCategoryModal/NewCategoryModal';
 import { mapCategoryToProps } from './Components/mapCategoryToProps';
+import { DefaultCategories } from '@types';
 
 export type Category = {
   id: string;
   label: string;
+  value: DefaultCategories;
   icon: {
     focused: IconProps['name'];
     unfocused: IconProps['name'];
@@ -32,7 +34,15 @@ export function CategoriesScreen({
   const { bottom } = useSafeAreaInsets();
 
   const [newCategoryModalVisible, setNewCategoryModalVisible] = useState(false);
-  const categories = Object.values(mapCategoryToProps) as Category[];
+  const categories: Category[] = (Object.entries(mapCategoryToProps) as [
+    DefaultCategories,
+    { label: string; icon: { focused: IconProps['name']; unfocused: IconProps['name'] } },
+  ][]).map(([value, props]) => ({
+    id: value,
+    label: props.label,
+    value: value,
+    icon: props.icon,
+  }));
 
   const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
     <TouchableOpacityBox
@@ -40,6 +50,7 @@ export function CategoriesScreen({
       justifyContent="center"
       marginBottom="s12"
       onPress={() => {
+        console.log(item);
         if (item.label !== 'Mais') {
           navigation.navigate('ListItemsCategoryScreen', { category: item });
         } else {

@@ -1,4 +1,4 @@
-import { IconProps, Option } from '@components';
+import { IconProps } from '@components';
 
 export type DefaultCategories =
   | 'food'
@@ -11,27 +11,8 @@ export type DefaultCategories =
   | 'entertainment'
   | 'more';
 
-export type CategoryType =
-  | 'food'
-  | 'transport'
-  | 'groceries'
-  | 'rent'
-  | 'gift'
-  | 'medicine'
-  | 'entertainment'
-  | 'saving'
-  | 'more'
-  | 'travel'
-  | 'newHome'
-  | 'car'
-  | 'wedding';
-
-export const categoryIconName: Record<CategoryType, IconProps['name']> = {
+export const categoryIconName: Record<DefaultCategories, IconProps['name']> = {
   food: 'foodDefault',
-  wedding: 'weddingDefault',
-  car: 'carDefault',
-  newHome: 'newHomeDefault',
-  travel: 'travelDefault',
   more: 'moreDefault',
   saving: 'savingDefault',
   entertainment: 'entertainmentDefault',

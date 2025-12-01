@@ -10,51 +10,22 @@ import {
   Text,
   TextInput,
 } from '@components';
-import { CategoryType } from '@types';
+import { DefaultCategories } from '@types';
 import { useState } from 'react';
+import { mapCategoryToProps } from '../../Components/mapCategoryToProps';
+import { AppCategoryScreenProps } from '@routes';
 
-const categoryLabels: Record<CategoryType, string> = {
-  wedding: 'Casamento',
-  car: 'Carro',
-  newHome: 'Casa Nova',
-  travel: 'Viagem',
-  more: 'Mais',
-  saving: 'Poupança',
-  entertainment: 'Entretenimento',
-  food: 'Comida',
-  medicine: 'Medicina',
-  gift: 'Presente',
-  rent: 'Aluguel',
-  groceries: 'Mercado',
-  transport: 'Transporte',
-  salary: 'Salário',
-};
-
-const categoryOptions: ReadonlyArray<Option<CategoryType>> = [
-  { label: categoryLabels.wedding, value: 'wedding' },
-  { label: categoryLabels.car, value: 'car' },
-  { label: categoryLabels.newHome, value: 'newHome' },
-  { label: categoryLabels.travel, value: 'travel' },
-  { label: categoryLabels.more, value: 'more' },
-  { label: categoryLabels.saving, value: 'saving' },
-  { label: categoryLabels.entertainment, value: 'entertainment' },
-  { label: categoryLabels.food, value: 'food' },
-  { label: categoryLabels.medicine, value: 'medicine' },
-  { label: categoryLabels.gift, value: 'gift' },
-  { label: categoryLabels.rent, value: 'rent' },
-  { label: categoryLabels.groceries, value: 'groceries' },
-  { label: categoryLabels.transport, value: 'transport' },
-  { label: categoryLabels.salary, value: 'salary' },
-] as const;
-
-export function NewTransactionScreen() {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(
-    null,
-  );
+export function NewTransactionScreen({
+  navigation,
+  route,
+}: AppCategoryScreenProps<'NewTransactionScreen'>) {
+  const [selectedCategory, setSelectedCategory] =
+    useState<DefaultCategories | null>(null);
   const [amount, setAmount] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [observation, setObservation] = useState<string>('');
+  const { categories } = route.params;
+  console.log(categories);
 
   return (
     <Screen scrollable canGoBack title="Nova transação" icon="notification">
@@ -62,7 +33,23 @@ export function NewTransactionScreen() {
         <DateInput label="Data" />
         <SelectInput
           label="Categorias"
-          items={categoryOptions}
+          items={
+            Array.isArray(categories)
+              ? categories
+                  .filter(category => mapCategoryToProps[category])
+                  .map(category => ({
+                    label: mapCategoryToProps[category].label,
+                    value: category,
+                  }))
+              : mapCategoryToProps[categories]
+              ? [
+                  {
+                    label: mapCategoryToProps[categories].label,
+                    value: categories,
+                  },
+                ]
+              : []
+          }
           value={selectedCategory}
           onValueChange={setSelectedCategory}
         />
@@ -77,16 +64,15 @@ export function NewTransactionScreen() {
           placeholder="Digite um título para a transação"
           value={title}
           onChangeText={setTitle}
+          boxProps={{
+            mt: 's12',
+            mb: 's12',
+          }}
         />
-        <TextInput
-          label="Descrição"
-          placeholder="Descrição"
-          value={description}
-          onChangeText={setDescription}
-        />
+
         <ObservationInput
-          label="Observação"
-          placeholder="Digite uma observação para a transação"
+          label="Descrição"
+          placeholder="Digite uma descrição para a transação"
           value={observation}
           onChangeText={setObservation}
         />

@@ -36,7 +36,7 @@ export function ObservationInput({
   return (
     <Box>
       {label && (
-        <Text mb="s4" preset="paragraphMedium">
+        <Text ms="s20" semibold>
           {label}
         </Text>
       )}

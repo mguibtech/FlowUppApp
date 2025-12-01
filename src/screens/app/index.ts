@@ -15,3 +15,6 @@ export * from './AnalysisScreen/Context';
 export * from './AccountBalanceScreen';
 
 export * from './QuicklyAnalysisScreen';
+
+export * from './SavingsScreen/SavingsScreen';
+export * from './SavingsScreen/Screens';
