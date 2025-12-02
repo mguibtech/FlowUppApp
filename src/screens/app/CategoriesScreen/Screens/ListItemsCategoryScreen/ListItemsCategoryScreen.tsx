@@ -16,7 +16,7 @@ import { SectionList } from 'react-native';
 import { useAppSafeArea } from '@hooks';
 import { useEffect, useMemo, useState } from 'react';
 
-type TransactionSection = {
+export type TransactionSection = {
   title: string; // Ex: 'April', 'March'
   data: Transaction[];
 };

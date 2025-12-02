@@ -17,7 +17,9 @@ export type AppCategoryStackParamList = {
     categories: DefaultCategories | DefaultCategories[];
   };
   SavingsScreen: undefined;
-  SavingsListScreen: undefined;
+  SavingsListScreen: {
+    category: Category;
+  };
 };
 
 const Stack = createNativeStackNavigator<AppCategoryStackParamList>();

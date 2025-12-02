@@ -39,11 +39,11 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: '5',
-    title: 'Salário',
+    title: 'Almoço',
     dateTime: '2023-04-05T09:00:00',
-    category: 'salary',
-    amount: 5000,
-    isExpense: false,
+    category: 'food',
+    amount: 45,
+    isExpense: true,
   },
   {
     id: '6',
@@ -136,10 +136,10 @@ export const mockTransactions: Transaction[] = [
   // Maio 2023
   {
     id: '17',
-    title: 'Salário',
+    title: 'Entretenimento',
     dateTime: '2023-05-05T09:00:00',
-    category: 'salary',
-    amount: 5000,
+    category: 'entertainment',
+    amount: 80,
     isExpense: false,
   },
   {
@@ -160,11 +160,11 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: '20',
-    title: 'Viagem',
+    title: 'Aluguel',
     dateTime: '2023-05-15T00:00:00',
-    category: 'travel',
-    amount: 1500,
-    isExpense: true,
+    category: 'rent',
+    amount: 1200,
+    isExpense: false,
   },
   {
     id: '21',
@@ -203,17 +203,9 @@ export const mockTransactions: Transaction[] = [
     id: '25',
     title: 'Salário',
     dateTime: '2023-06-05T09:00:00',
-    category: 'salary',
+    category: 'entertainment',
     amount: 5000,
     isExpense: false,
-  },
-  {
-    id: '26',
-    title: 'Aluguel',
-    dateTime: '2023-06-10T00:00:00',
-    category: 'rent',
-    amount: 1200,
-    isExpense: true,
   },
   {
     id: '27',

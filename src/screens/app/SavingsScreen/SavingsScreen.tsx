@@ -68,7 +68,7 @@ export function SavingsScreen({
       justifyContent="center"
       marginBottom="s12"
       onPress={() => {
-        navigation.navigate('SavingsScreen');
+        navigation.navigate('SavingsListScreen', { category: item });
       }}
     >
       <Icon name={item.icon.unfocused} size={90} color="white" />
