@@ -3,6 +3,7 @@ import {
   CategoriesScreen,
   Category,
   ListItemsCategoryScreen,
+  NewSavingTransactionScreen,
   NewTransactionScreen,
   SavingsListScreen,
   SavingsScreen,
@@ -19,6 +20,9 @@ export type AppCategoryStackParamList = {
   SavingsScreen: undefined;
   SavingsListScreen: {
     category: Category;
+  };
+  NewSavingTransactionScreen: {
+    categories: DefaultCategories | DefaultCategories[];
   };
 };
 
@@ -43,6 +47,10 @@ export function AppCategoryStack() {
       />
       <Stack.Screen name="SavingsScreen" component={SavingsScreen} />
       <Stack.Screen name="SavingsListScreen" component={SavingsListScreen} />
+      <Stack.Screen
+        name="NewSavingTransactionScreen"
+        component={NewSavingTransactionScreen}
+      />
     </Stack.Navigator>
   );
 }

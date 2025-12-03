@@ -14,6 +14,8 @@ import { AppCategoryScreenProps } from '@routes';
 import { mapCategoryToProps } from '../CategoriesScreen/Components/mapCategoryToProps';
 import { DefaultCategories, DefaultSavings } from '@types';
 import { FlatList, ListRenderItem } from 'react-native';
+import { NewSavingCategoryModal } from './Components/NewSavingCategoryModal/NewSavingCategoryModal';
+import { useState } from 'react';
 
 export function SavingsScreen({
   navigation,
@@ -62,6 +64,13 @@ export function SavingsScreen({
     },
   ];
 
+  const [newSavingCategoryModalVisible, setNewSavingCategoryModalVisible] =
+    useState(false);
+
+  function handleNewSavingCategory() {
+    setNewSavingCategoryModalVisible(true);
+  }
+
   const renderCategoryItem: ListRenderItem<Category> = ({ item }) => (
     <TouchableOpacityBox
       alignItems="center"
@@ -97,7 +106,7 @@ export function SavingsScreen({
             <Box alignItems="center">
               <Button
                 title="Adicionar"
-                onPress={() => {}}
+                onPress={handleNewSavingCategory}
                 width="50%"
                 mt="s56"
               />
@@ -105,6 +114,14 @@ export function SavingsScreen({
           )}
         />
       </BodyBox>
+
+      <NewSavingCategoryModal
+        visible={newSavingCategoryModalVisible}
+        onClose={() => setNewSavingCategoryModalVisible(false)}
+        onConfirm={data => {
+          console.log(data);
+        }}
+      />
     </Screen>
   );
 }

@@ -12,13 +12,13 @@ import {
 } from '@components';
 import { DefaultCategories } from '@types';
 import { useState } from 'react';
-import { mapCategoryToProps } from '../../Components/mapCategoryToProps';
+import { mapCategoryToProps } from '@screens';
 import { AppCategoryScreenProps } from '@routes';
 
-export function NewTransactionScreen({
+export function NewSavingTransactionScreen({
   navigation,
   route,
-}: AppCategoryScreenProps<'NewTransactionScreen'>) {
+}: AppCategoryScreenProps<'NewSavingTransactionScreen'>) {
   const [selectedCategory, setSelectedCategory] =
     useState<DefaultCategories | null>(null);
   const [amount, setAmount] = useState<string>('');
