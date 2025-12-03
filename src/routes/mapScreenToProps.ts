@@ -41,7 +41,7 @@ export const mapScreenToProps: Record<
     },
   },
 
-  ProfileScreen: {
+  AppProfileStack: {
     label: 'Perfil',
     icon: {
       focused: 'profileFill',

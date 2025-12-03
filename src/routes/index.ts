@@ -5,3 +5,4 @@ export * from './AppTabBar';
 export * from './AppTabNavigation';
 export * from './navigationTypes';
 export * from './AppAnalysisStack';
+export * from './AppProfileScreen';

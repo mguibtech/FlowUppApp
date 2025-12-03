@@ -2,23 +2,18 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {
-  HomeScreen,
-  TransactionsScreen,
-  CategoriesScreen,
-  AnalysisScreen,
-  ProfileScreen,
-} from '@screens';
+import { HomeScreen, TransactionsScreen } from '@screens';
 import { AppTabBar } from './AppTabBar';
 import { AppAnalysisStack } from './AppAnalysisStack';
 import { AppCategoryStack } from './AppCategoryStack';
+import { AppProfileStack } from './AppProfileScreen';
 
 export type AppBottomTabParamList = {
   HomeScreen: undefined;
   TransactionScreen: undefined;
   AppAnalysisStack: undefined;
-  ProfileScreen: undefined;
   AppCategoryStack: undefined;
+  AppProfileStack: undefined;
 };
 
 const Tab = createBottomTabNavigator<AppBottomTabParamList>();
@@ -39,7 +34,7 @@ export function AppTabNavigation() {
       <Tab.Screen name="AppAnalysisStack" component={AppAnalysisStack} />
       <Tab.Screen name="TransactionScreen" component={TransactionsScreen} />
       <Tab.Screen name="AppCategoryStack" component={AppCategoryStack} />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Tab.Screen name="AppProfileStack" component={AppProfileStack} />
     </Tab.Navigator>
   );
 }

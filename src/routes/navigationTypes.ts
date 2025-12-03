@@ -7,6 +7,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { AppCategoryStackParamList } from './AppCategoryStack';
 import { AppAnalysisStackParamList } from './AppAnalysisStack';
+import { AppProfileStackParamList } from './AppProfileScreen';
 
 declare global {
   namespace ReactNavigation {
@@ -38,4 +39,11 @@ export type AppAnalysisScreenProps<
 > = CompositeScreenProps<
   NativeStackScreenProps<AppAnalysisStackParamList, RouteName>,
   NativeStackScreenProps<AppAnalysisStackParamList, 'AnalysisScreen'>
+>;
+
+export type AppProfileScreenProps<
+  RouteName extends keyof AppProfileStackParamList,
+> = CompositeScreenProps<
+  NativeStackScreenProps<AppProfileStackParamList, RouteName>,
+  NativeStackScreenProps<AppProfileStackParamList, 'ProfileScreen'>
 >;

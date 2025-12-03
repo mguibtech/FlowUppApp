@@ -56,3 +56,7 @@ export * from './MoreDefaultIcon';
 export * from './MorePressedIcon';
 export * from './SearchIcon';
 export * from './CalendarIcon';
+export * from './HelpIcon';
+export * from './SettingIcon';
+export * from './SecurityIcon';
+export * from './LogoutIcon';

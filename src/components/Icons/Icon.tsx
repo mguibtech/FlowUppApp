@@ -55,6 +55,10 @@ import {
   MorePressedIcon,
   CalendarIcon,
   SearchIcon,
+  HelpIcon,
+  SettingIcon,
+  SecurityIcon,
+  LogoutIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -64,12 +68,14 @@ export interface IconProps {
   name: IconName;
   color?: ThemeColors;
   size?: number;
+  backgroundColor?: ThemeColors;
   onPress?: () => void;
 }
 
 export function Icon({
   name,
   color = 'backgroundContrast',
+  backgroundColor = 'primary',
   size,
   onPress,
 }: IconProps) {
@@ -82,6 +88,9 @@ export function Icon({
       <Pressable onPress={onPress}>
         <SVGIcon
           color={colors[color as keyof typeof colors] as ThemeColors}
+          backgroundColor={
+            colors[backgroundColor as keyof typeof colors] as ThemeColors
+          }
           size={size}
         />
       </Pressable>
@@ -90,6 +99,9 @@ export function Icon({
   return (
     <SVGIcon
       color={colors[color as keyof typeof colors] as ThemeColors}
+      backgroundColor={
+        colors[backgroundColor as keyof typeof colors] as ThemeColors
+      }
       size={size}
     />
   );
@@ -152,6 +164,10 @@ const iconRegistry = {
   weddingPressed: WeddingPressedIcon,
   search: SearchIcon,
   calendar: CalendarIcon,
+  help: HelpIcon,
+  setting: SettingIcon,
+  security: SecurityIcon,
+  logout: LogoutIcon,
 };
 
 type IconType = typeof iconRegistry;

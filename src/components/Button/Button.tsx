@@ -36,6 +36,7 @@ export function Button({
       alignItems="center"
       justifyContent="center"
       borderRadius="s32"
+      height={44}
       {...buttonPreset.container}
       {...touchableOpacityBoxProps}
     >
@@ -44,6 +45,7 @@ export function Button({
       ) : (
         <Text
           preset="paragraphMedium"
+          semibold
           color={buttonPreset.content}
           {...titlePreset}
         >
