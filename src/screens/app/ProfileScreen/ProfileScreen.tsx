@@ -26,7 +26,7 @@ export function ProfileScreen({
           </Text>
           <Text preset="paragraphMedium">joao.silva@example.com</Text>
         </Box>
-        <Box marginStart="s10" mt="s52">
+        <Box marginStart="s10" mt="s52" gap="s32">
           <TouchableOpacityBox
             flexDirection="row"
             alignItems="center"
@@ -47,27 +47,25 @@ export function ProfileScreen({
             alignItems="center"
             justifyContent="flex-start"
             gap="s12"
-            mt="s36"
           >
             <Icon name="security" size={60} color="white" />
             <Text semibold>Segurança</Text>
           </Box>
-          <Box
+          <TouchableOpacityBox
             flexDirection="row"
             alignItems="center"
             justifyContent="flex-start"
             gap="s12"
-            mt="s36"
+            onPress={() => navigation.navigate('SecurityScreen')}
           >
             <Icon name="setting" size={60} />
             <Text semibold>Configurações</Text>
-          </Box>
+          </TouchableOpacityBox>
           <Box
             flexDirection="row"
             alignItems="center"
             justifyContent="flex-start"
             gap="s12"
-            mt="s36"
           >
             <Icon
               name="logout"

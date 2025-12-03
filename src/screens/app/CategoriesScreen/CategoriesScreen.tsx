@@ -1,6 +1,7 @@
 import {
   BodyBox,
   Box,
+  Button,
   ExpensePercentageBar,
   Icon,
   IconProps,
@@ -34,6 +35,8 @@ export function CategoriesScreen({
   const { bottom } = useSafeAreaInsets();
 
   const [newCategoryModalVisible, setNewCategoryModalVisible] = useState(false);
+
+  console.log('CategoriesScreen - modal visible:', newCategoryModalVisible);
   const categories: Category[] = (
     Object.entries(mapCategoryToProps) as [
       DefaultCategories,
@@ -60,11 +63,6 @@ export function CategoriesScreen({
           categories.find(category => category.value === 'saving')?.value
         ) {
           navigation.navigate('SavingsScreen');
-        } else if (
-          item.value ===
-          categories.find(category => category.value === 'more')?.value
-        ) {
-          setNewCategoryModalVisible(true);
         } else {
           navigation.navigate('ListItemsCategoryScreen', { category: item });
         }
@@ -96,6 +94,17 @@ export function CategoriesScreen({
               <Text preset="paragraphMedium" color="primaryContrast" semibold>
                 Lista vazia
               </Text>
+            </Box>
+          )}
+          ListFooterComponent={() => (
+            <Box flex={1} alignItems="center" justifyContent="center" mt="s32">
+              <Button
+                title="Adicionar categoria"
+                onPress={() => {
+                  console.log('Button pressed, setting modal to true');
+                  setNewCategoryModalVisible(true);
+                }}
+              />
             </Box>
           )}
         />

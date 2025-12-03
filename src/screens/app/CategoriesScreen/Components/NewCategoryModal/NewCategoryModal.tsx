@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, TouchableWithoutFeedback, FlatList } from 'react-native';
+import {
+  Modal,
+  TouchableWithoutFeedback,
+  FlatList,
+  View,
+  StyleSheet,
+} from 'react-native';
 
 import { Box, Text, Button, TextInput, Icon } from '@components';
 import { IconProps } from '@components';
@@ -49,125 +55,144 @@ export function NewCategoryModal({
     ? mapCategoryToProps[selectedCategory].icon.focused
     : 'moreDefault';
 
+  useEffect(() => {
+    console.log('Modal visible:', visible);
+  }, [visible]);
+
   return (
     <Modal
       visible={visible}
-      animationType="slide"
+      animationType="fade"
       transparent
       statusBarTranslucent
       onRequestClose={onClose}
     >
-      <TouchableWithoutFeedback onPress={onClose}>
-        <Box
-          flex={1}
-          justifyContent="center"
-          alignItems="center"
-          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-        >
-          <TouchableWithoutFeedback>
-            <Box
-              width="90%"
-              maxWidth={400}
-              backgroundColor="background"
-              borderRadius="s24"
-              padding="s24"
-            >
-              <Text preset="headingSmall" semibold textAlign="center">
-                Nova categoria
-              </Text>
+      <View style={styles.overlay}>
+        <TouchableWithoutFeedback onPress={onClose}>
+          <View style={styles.backdrop} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalContent}>
+          <Box
+            width="90%"
+            maxWidth={400}
+            backgroundColor="background"
+            borderRadius="s24"
+            padding="s24"
+          >
+            <Text preset="headingSmall" semibold textAlign="center">
+              Nova categoria
+            </Text>
 
+            <Text
+              preset="paragraphSmall"
+              textAlign="center"
+              marginTop="s8"
+              color="primaryContrast"
+            >
+              Escolha um nome e um ícone para a nova categoria.
+            </Text>
+
+            <Box marginTop="s24">
+              <TextInput
+                label="Nome da categoria"
+                placeholder="Ex: Academia, Pets, Estudos..."
+                value={name}
+                onChangeText={setName}
+              />
+            </Box>
+
+            {/* Preview */}
+            <Box marginTop="s16" alignItems="center" justifyContent="center">
+              <Icon name={previewIconName} size={50} color="white" />
               <Text
                 preset="paragraphSmall"
-                textAlign="center"
                 marginTop="s8"
                 color="primaryContrast"
+                textAlign="center"
               >
-                Escolha um nome e um ícone para a nova categoria.
+                {selectedCategory
+                  ? 'Esse será o ícone da categoria.'
+                  : 'Selecione um ícone abaixo.'}
+              </Text>
+            </Box>
+
+            {/* Lista de categorias/ícones */}
+            <Box marginTop="s16">
+              <Text preset="paragraphSmall" semibold marginBottom="s8">
+                Ícones disponíveis
               </Text>
 
-              <Box marginTop="s24">
-                <TextInput
-                  label="Nome da categoria"
-                  placeholder="Ex: Academia, Pets, Estudos..."
-                  value={name}
-                  onChangeText={setName}
-                />
-              </Box>
+              <Box maxHeight={230} borderRadius="s16" overflow="hidden">
+                <FlatList
+                  data={availableCategories}
+                  keyExtractor={item => item}
+                  numColumns={4}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item }) => {
+                    const { icon } = mapCategoryToProps[item];
+                    const isSelected = selectedCategory === item;
 
-              {/* Preview */}
-              <Box marginTop="s16" alignItems="center" justifyContent="center">
-                <Icon name={previewIconName} size={50} color="white" />
-                <Text
-                  preset="paragraphSmall"
-                  marginTop="s8"
-                  color="primaryContrast"
-                  textAlign="center"
-                >
-                  {selectedCategory
-                    ? 'Esse será o ícone da categoria.'
-                    : 'Selecione um ícone abaixo.'}
-                </Text>
-              </Box>
-
-              {/* Lista de categorias/ícones */}
-              <Box marginTop="s16">
-                <Text preset="paragraphSmall" semibold marginBottom="s8">
-                  Ícones disponíveis
-                </Text>
-
-                <Box maxHeight={230} borderRadius="s16" overflow="hidden">
-                  <FlatList
-                    data={availableCategories}
-                    keyExtractor={item => item}
-                    numColumns={4}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item }) => {
-                      const { icon } = mapCategoryToProps[item];
-                      const isSelected = selectedCategory === item;
-
-                      return (
-                        <Box
-                          width="25%"
-                          height={50}
-                          alignItems="center"
-                          justifyContent="center"
-                          marginBottom="s12"
-                        >
-                          <Icon
-                            name={isSelected ? icon.focused : icon.unfocused}
-                            size={50}
-                            onPress={() => setSelectedCategory(item)}
-                          />
-                        </Box>
-                      );
-                    }}
-                  />
-                </Box>
-              </Box>
-
-              {/* Botões */}
-              <Box
-                flexDirection="row"
-                justifyContent="space-between"
-                marginTop="s24"
-              >
-                <Button
-                  title="Cancelar"
-                  preset="outline"
-                  width="48%"
-                  onPress={onClose}
-                />
-                <Button
-                  title="Salvar"
-                  width="48%"
-                  onPress={handleConfirm}
-                  disabled={!canConfirm}
+                    return (
+                      <Box
+                        width="25%"
+                        height={50}
+                        alignItems="center"
+                        justifyContent="center"
+                        marginBottom="s12"
+                      >
+                        <Icon
+                          name={isSelected ? icon.focused : icon.unfocused}
+                          size={50}
+                          onPress={() => setSelectedCategory(item)}
+                        />
+                      </Box>
+                    );
+                  }}
                 />
               </Box>
             </Box>
-          </TouchableWithoutFeedback>
-        </Box>
-      </TouchableWithoutFeedback>
+
+            {/* Botões */}
+            <Box
+              flexDirection="row"
+              justifyContent="space-between"
+              marginTop="s24"
+            >
+              <Button
+                title="Cancelar"
+                preset="outline"
+                width="48%"
+                onPress={onClose}
+              />
+              <Button
+                title="Salvar"
+                width="48%"
+                onPress={handleConfirm}
+                disabled={!canConfirm}
+              />
+            </Box>
+          </Box>
+        </View>
+      </View>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    position: 'absolute',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
+});

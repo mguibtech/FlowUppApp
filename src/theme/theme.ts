@@ -18,6 +18,10 @@ export const palette = {
 
   black: '#031314',
   white: '#F0F2F3',
+
+  grayLight: '#F2F2F2',
+  gray: '#808080',
+  grayDark: '#3B3B3B ',
 };
 
 export const theme = createTheme({
