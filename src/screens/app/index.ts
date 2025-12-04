@@ -18,3 +18,5 @@ export * from './QuicklyAnalysisScreen';
 
 export * from './SavingsScreen/SavingsScreen';
 export * from './SavingsScreen/Screens';
+
+export * from './ProfileScreen';

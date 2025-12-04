@@ -42,15 +42,7 @@ export function ProfileScreen({
             />
             <Text semibold>Editar perfil</Text>
           </TouchableOpacityBox>
-          <Box
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="flex-start"
-            gap="s12"
-          >
-            <Icon name="security" size={60} color="white" />
-            <Text semibold>Segurança</Text>
-          </Box>
+
           <TouchableOpacityBox
             flexDirection="row"
             alignItems="center"
@@ -61,21 +53,21 @@ export function ProfileScreen({
             <Icon name="setting" size={60} />
             <Text semibold>Configurações</Text>
           </TouchableOpacityBox>
-          <Box
+          <TouchableOpacityBox
             flexDirection="row"
             alignItems="center"
             justifyContent="flex-start"
             gap="s12"
+            onPress={() => setLogoutModalVisible(true)}
           >
             <Icon
               name="logout"
               size={60}
               color="white"
               backgroundColor="blueLight"
-              onPress={() => setLogoutModalVisible(true)}
             />
             <Text semibold>Sair</Text>
-          </Box>
+          </TouchableOpacityBox>
         </Box>
       </BodyBox>
       <LogoutModal

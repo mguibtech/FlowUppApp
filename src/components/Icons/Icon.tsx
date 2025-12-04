@@ -59,6 +59,7 @@ import {
   SettingIcon,
   SecurityIcon,
   LogoutIcon,
+  RightArrowIcon,
 } from '@assets';
 import { useAppTheme } from '@hooks';
 import { ThemeColors } from '@theme';
@@ -168,6 +169,7 @@ const iconRegistry = {
   setting: SettingIcon,
   security: SecurityIcon,
   logout: LogoutIcon,
+  rightArrow: RightArrowIcon,
 };
 
 type IconType = typeof iconRegistry;

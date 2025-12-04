@@ -60,3 +60,4 @@ export * from './HelpIcon';
 export * from './SettingIcon';
 export * from './SecurityIcon';
 export * from './LogoutIcon';
+export * from './RightArrowIcon';
