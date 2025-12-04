@@ -9,9 +9,11 @@ import {
   FingerprintScreen,
   FingerPrintItemScreen,
   AddFingerprintScreen,
+  TermsAndConditionsScreen,
 } from '@screens';
 
 export type AppProfileStackParamList = {
+  TermsAndConditionsScreen: undefined;
   EditProfileScreen: undefined;
   ProfileScreen: undefined;
   SecurityScreen: undefined;
@@ -47,6 +49,10 @@ export function AppProfileStack() {
         <Stack.Screen
           name="AddFingerprintScreen"
           component={AddFingerprintScreen}
+        />
+        <Stack.Screen
+          name="TermsAndConditionsScreen"
+          component={TermsAndConditionsScreen}
         />
       </Stack.Navigator>
     </AnalysisProvider>

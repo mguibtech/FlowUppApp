@@ -20,3 +20,4 @@ export * from './SemiCircularChart/SemiCircularChart';
 export * from './RadioButton/RadioButton';
 export * from './ObservationInput/ObservationInput';
 export * from './ToggleSwitch/ToggleSwitch';
+export * from './Checkbox/Checkbox';

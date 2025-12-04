@@ -21,6 +21,9 @@ export function SecurityScreen({
   const handleFingerprintList = () => {
     navigation.navigate('FingerprintListScreen');
   };
+  const handleTermsAndConditions = () => {
+    navigation.navigate('TermsAndConditionsScreen');
+  };
 
   const handleOpenDeleteAccountModal = () => {
     setVisible(true);
@@ -82,6 +85,7 @@ export function SecurityScreen({
             borderBottomColor="greenLight"
             paddingBottom="s32"
             marginBottom="s24"
+            onPress={handleTermsAndConditions}
           >
             <Text preset="paragraphMedium">Termos e condições</Text>
             <Icon name="rightArrow" size={16} />
