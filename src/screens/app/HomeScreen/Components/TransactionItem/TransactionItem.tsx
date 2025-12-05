@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Box, Text, TouchableOpacityBox } from '@components';
+import { Box, IconProps, Text, TouchableOpacityBox } from '@components';
 import { ThemeColors } from '@theme';
 import { CircularIcon } from '../CircularIcon/CircularIcon';
 
 export interface TransactionItemProps {
-  readonly iconName: string;
+  readonly iconName: IconProps['name'];
   readonly title: string;
   readonly dateTime: string; // ex: "18:27 - April 30"
   readonly category: string;
